@@ -201,10 +201,10 @@ a { color: inherit; }
   padding: var(--space-3);
 }
 .invite-monogram {
-  height: 54px;
+  height: 96px;
   width: auto;
   mix-blend-mode: multiply;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 .invite-topbar .nav-toggle { font-size: 20px; }
 
@@ -225,9 +225,15 @@ a { color: inherit; }
   color: var(--taupe);
   margin-bottom: var(--space-1);
 }
-.countdown-sm { gap: var(--space-2); margin-bottom: var(--space-3); }
-.countdown-sm .num { font-size: 26px; }
-.countdown-sm .sep { font-size: 20px; color: var(--sand); }
+.countdown.countdown-sm { gap: var(--space-2); margin-bottom: var(--space-3); flex-wrap: nowrap; }
+.countdown.countdown-sm .unit { min-width: 0; }
+.countdown.countdown-sm .num { font-size: 22px; line-height: 1; }
+.countdown.countdown-sm .lbl { font-size: 9px; }
+.countdown.countdown-sm .sep { font-size: 16px; color: var(--sand); }
+@media (max-width: 380px) {
+  .countdown.countdown-sm { gap: 10px; }
+  .countdown.countdown-sm .num { font-size: 18px; }
+}
 
 .invite-names {
   font-size: clamp(30px, 6vw, 42px);
@@ -318,10 +324,11 @@ a { color: inherit; }
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 .wax-seal img {
-  width: 62%;
-  height: 62%;
+  width: 72%;
+  height: 72%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: invert(1) contrast(1.4);
+  mix-blend-mode: screen;
 }
 
 /* Opening animation states */

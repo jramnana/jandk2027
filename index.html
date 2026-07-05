@@ -146,7 +146,7 @@
     }
 
     .scene-open {
-        width: min(132vw, 595px);
+        width: min(112vw, 520px);
         opacity: 0;
         transform:translate(-50%, -47%) scale(.94)
     }
@@ -945,12 +945,12 @@
         }
 
         .scene-open {
-            width: min(860px, 76vw);
-            transform:translate(-50%, -47%) scale(1.08)
+            width: min(760px, 68vw);
+            transform:translate(-50%, -47%) scale(1.04)
         }
 
         .invite.invite-ready .scene-open {
-            transform:translate(-50%, -50%) scale(1.14)
+            transform:translate(-50%, -50%) scale(1.06)
         }
 
         .invitation-copy {
@@ -1085,16 +1085,6 @@
         <div class="invite-art">
             <img class="scene-img scene-closed" src="assets/closed-envelope.png" alt="Closed wedding invitation envelope">
             <img class="scene-img scene-open" src="assets/opened-invitation.png" alt="Opened wedding invitation">
-            <div class="invitation-copy">
-                <p>Together with their families</p>
-                <p>request the pleasure of your company</p>
-                <p>at the wedding of</p>
-                <span class="mono invite-monogram"></span>
-                <h2>Jeremy & Kimia</h2>
-                <i></i>
-                <h3>May 27–30, 2027</h3>
-                <em>Naoussa, Paros, Greece</em>
-            </div>
         </div>
         <form id="gate-form" class="gate-form">
             <label for="gate-input">Please enter the password</label>
@@ -1426,6 +1416,8 @@
             if (input.value.trim().toLowerCase() === SITE_PASSWORD.toLowerCase()) {
                 sessionStorage.setItem("wedding-unlocked", "true");
                 error.textContent = "";
+                if (window.startWeddingMusic)
+                    window.startWeddingMusic();
                 invite.classList.add("opening");
                 setTimeout(() => {
                     invite.classList.add("opened");
@@ -1586,6 +1578,50 @@
                 console.warn("Audio playback blocked:", e);
             }
         });
+    })();
+
+
+    (function() {
+        const audio = document.getElementById("bg-music");
+        const btn = document.getElementById("music-toggle");
+        if (!audio || !btn)
+            return;
+
+        audio.volume = 0.12;
+
+        async function playMusic() {
+            try {
+                await audio.play();
+                btn.classList.add("playing");
+                btn.textContent = "Ⅱ";
+            } catch (e) {
+                btn.classList.remove("playing");
+                btn.textContent = "♪";
+            }
+        }
+
+        function pauseMusic() {
+            audio.pause();
+            btn.classList.remove("playing");
+            btn.textContent = "♪";
+        }
+
+        btn.addEventListener("click", () => {
+            if (audio.paused)
+                playMusic();
+            else
+                pauseMusic();
+        });
+
+        window.addEventListener("load", () => setTimeout(playMusic, 500));
+
+        ["pointerdown", "touchstart", "keydown"].forEach(evt => {
+            document.addEventListener(evt, playMusic, {
+                once: true
+            });
+        });
+
+        window.startWeddingMusic = playMusic;
     })();
     </script>
 </body>

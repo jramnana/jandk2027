@@ -1,4 +1,4 @@
-/* Project Paros — asset position fix */
+/* Project Paros — invite open sequence + mobile background */
 :root{
   --ivory:#FBF8F4;--stone:#E7E2DA;--soft-blush:#F3D8DC;--dusty-rose:#B86773;--deep-rose:#8B3E4A;--taupe:#6B6156;--ink:#2D2926;--line:rgba(107,97,86,.22);
   --display:'Cormorant Garamond',serif;--body:'Inter',sans-serif;
@@ -15,7 +15,7 @@ p{color:var(--taupe)}a{color:inherit}
 #main-content.revealed{display:block;animation:contentReveal .9s ease forwards}
 @keyframes contentReveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-/* Opening invitation */
+/* INVITE */
 .invite{
   position:fixed;
   inset:0;
@@ -28,22 +28,24 @@ p{color:var(--taupe)}a{color:inherit}
   transition:opacity .8s ease,visibility .8s ease;
 }
 .invite.opened{opacity:0;visibility:hidden;pointer-events:none}
+.invite picture{position:absolute;inset:0;display:block}
 .invite-bg{
-  position:absolute;
-  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
   object-position:center;
-  z-index:0;
+  display:block;
 }
-.invite-stack{
+
+.invite-stage{
   position:relative;
   z-index:2;
-  width:min(620px,86vw);
-  height:min(680px,74svh);
+  width:min(640px,86vw);
+  height:min(690px,76svh);
   margin-top:-4svh;
 }
+
+/* Asset layers */
 .layer{
   position:absolute;
   display:block;
@@ -51,55 +53,60 @@ p{color:var(--taupe)}a{color:inherit}
   user-select:none;
   pointer-events:none;
 }
-
-/* Real asset layering */
 .envelope-back{
   z-index:1;
-  width:90%;
-  left:5%;
-  bottom:13%;
+  width:92%;
+  left:4%;
+  bottom:12%;
+}
+.paper-wrap{
+  position:absolute;
+  z-index:2;
+  width:52%;
+  left:24%;
+  top:3%;
+  height:70%;
+  transform:translateY(70px);
+  opacity:.92;
+  transform-origin:center bottom;
+  transition:transform 1.15s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
 }
 .paper{
-  z-index:2;
-  width:51%;
-  left:24.5%;
-  top:1%;
+  width:100%;
+  height:auto;
+  left:0;
+  top:0;
   filter:drop-shadow(0 24px 32px rgba(45,41,38,.22));
-  transform-origin:center bottom;
-  transition:transform 1.05s cubic-bezier(.2,.8,.2,1),opacity .85s ease;
 }
 .envelope-front{
   z-index:4;
-  width:95%;
-  left:2.5%;
+  width:96%;
+  left:2%;
   bottom:5%;
   transition:transform .95s ease,opacity .85s ease;
 }
 .envelope-flap{
   z-index:5;
-  width:86%;
-  left:7%;
-  bottom:34%;
+  width:88%;
+  left:6%;
+  bottom:35%;
   transform-origin:center top;
-  transition:transform .95s cubic-bezier(.2,.8,.2,1),opacity .85s ease;
+  transition:transform 1.05s cubic-bezier(.2,.8,.2,1), opacity .85s ease;
 }
 
-/* Text overlay aligned to paper */
+/* Card content */
 .paper-copy{
   position:absolute;
+  inset:0;
   z-index:3;
-  top:5.4%;
-  left:50%;
-  transform:translateX(-50%);
-  width:36%;
   text-align:center;
+  padding:13% 10% 0;
   pointer-events:none;
-  transition:transform 1.05s cubic-bezier(.2,.8,.2,1),opacity .85s ease;
 }
 .paper-copy p{
   margin:0 0 5px;
-  font-size:8.5px;
-  letter-spacing:.2em;
+  font-size:8px;
+  letter-spacing:.19em;
   text-transform:uppercase;
   color:var(--taupe);
 }
@@ -110,7 +117,7 @@ p{color:var(--taupe)}a{color:inherit}
   display:block;
 }
 .paper-copy h1{
-  font-size:clamp(19px,2vw,28px);
+  font-size:clamp(20px,2vw,28px);
   letter-spacing:.16em;
   text-transform:uppercase;
   white-space:nowrap;
@@ -137,12 +144,12 @@ p{color:var(--taupe)}a{color:inherit}
   color:var(--taupe);
 }
 
-/* Wax seal */
+/* Wax */
 .wax-seal{
   position:absolute;
   z-index:6;
   left:50%;
-  bottom:22.5%;
+  bottom:23%;
   transform:translateX(-50%);
   width:78px;
   height:78px;
@@ -152,22 +159,25 @@ p{color:var(--taupe)}a{color:inherit}
   cursor:pointer;
   transition:transform .7s ease,opacity .65s ease;
 }
-.wax-seal img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  display:block;
-}
+.wax-seal img{width:100%;height:100%;object-fit:contain;display:block}
 
-/* Password */
+/* Password hidden until invitation opens */
 .gate-form{
   position:absolute;
   z-index:7;
   left:50%;
   bottom:3.4svh;
-  transform:translateX(-50%);
+  transform:translate(-50%, 16px);
   width:min(380px,76vw);
   text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .7s ease, transform .7s ease;
+}
+.invite.invite-ready .gate-form{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,0);
 }
 .gate-form label{
   display:block;
@@ -177,10 +187,7 @@ p{color:var(--taupe)}a{color:inherit}
   text-transform:uppercase;
   color:var(--deep-rose);
 }
-.gate-row{
-  display:flex;
-  border-bottom:1px solid var(--deep-rose);
-}
+.gate-row{display:flex;border-bottom:1px solid var(--deep-rose)}
 .gate-row input{
   flex:1;
   min-width:0;
@@ -193,20 +200,22 @@ p{color:var(--taupe)}a{color:inherit}
   color:var(--ink);
   outline:none;
 }
-.gate-row button{
-  border:0;
-  background:transparent;
-  color:var(--deep-rose);
-  font-size:26px;
-  cursor:pointer;
-}
+.gate-row button{border:0;background:transparent;color:var(--deep-rose);font-size:26px;cursor:pointer}
 .gate-error{min-height:18px;margin-top:8px;font-size:12px;color:var(--deep-rose)}
 
+/* Load animation: closed -> open */
+.invite:not(.invite-ready) .paper-wrap{transform:translateY(150px);opacity:.5}
+.invite:not(.invite-ready) .envelope-flap{transform:rotateX(0deg)}
+.invite.invite-ready .paper-wrap{transform:translateY(0);opacity:1}
+.invite.invite-ready .envelope-flap{transform:rotateX(74deg) translateY(-6px);opacity:.25}
+.invite.invite-ready .envelope-front{transform:translateY(10px)}
+.invite.invite-ready .wax-seal{transform:translateX(-50%) scale(.92);opacity:.95}
+
+/* Correct password animation */
 .invite.opening .wax-seal{transform:translateX(-50%) scale(0) rotate(20deg);opacity:0}
-.invite.opening .envelope-flap{transform:rotateX(76deg) translateY(-8px);opacity:.28}
-.invite.opening .envelope-front{transform:translateY(16px);opacity:.25}
-.invite.opening .paper{transform:translateY(-190px) scale(1.04);opacity:0}
-.invite.opening .paper-copy{transform:translateX(-50%) translateY(-190px) scale(1.04);opacity:0}
+.invite.opening .envelope-flap{opacity:0}
+.invite.opening .envelope-front{transform:translateY(24px);opacity:.15}
+.invite.opening .paper-wrap{transform:translateY(-190px) scale(1.04);opacity:0}
 
 /* Nav */
 .site-nav{position:sticky;top:0;z-index:20;background:rgba(251,248,244,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -247,15 +256,20 @@ section{padding:var(--s6) var(--s3)}
 #rsvp-confirm{display:none}.site-footer{padding:var(--s3);display:flex;flex-wrap:wrap;gap:var(--s2);justify-content:center;background:var(--deep-rose);color:var(--ivory);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
 
 @media(max-height:760px){
-  .invite-stack{height:76svh;width:min(540px,82vw);margin-top:-7svh}
+  .invite-stage{height:74svh;width:min(560px,82vw);margin-top:-7svh}
   .gate-form{bottom:2svh}
   .wax-seal{width:66px;height:66px}
 }
+
 @media(max-width:760px){
-  .invite-stack{width:96vw;height:min(650px,72svh);margin-top:-4svh}
-  .paper{width:56%;left:22%}
-  .paper-copy{width:41%;top:4.8%}
-  .paper-copy p{font-size:6.7px;margin-bottom:3px}
+  .invite-bg{object-position:center top}
+  .invite-stage{width:94vw;height:min(640px,70svh);margin-top:-5svh}
+  .paper-wrap{width:56%;left:22%;top:2%}
+  .envelope-back{width:94%;left:3%;bottom:12%}
+  .envelope-front{width:98%;left:1%;bottom:5%}
+  .envelope-flap{width:90%;left:5%;bottom:35%}
+  .paper-copy{padding:12% 9% 0}
+  .paper-copy p{font-size:6.5px;margin-bottom:3px}
   .paper-copy img{width:50%;margin:10px auto}
   .paper-copy h1{font-size:18px}
   .paper-copy h2{font-size:10px}

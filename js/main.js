@@ -7,6 +7,11 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
   const form=document.getElementById('gate-form');
   const input=document.getElementById('gate-input');
   const error=document.getElementById('gate-error');
+  const wax=document.getElementById('wax-button');
+
+  if(wax){
+    wax.addEventListener('click',()=>input.focus());
+  }
 
   if(sessionStorage.getItem('wedding-unlocked')==='true'){
     inviteEl.classList.add('opened');
@@ -27,7 +32,7 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
         mainContent.classList.add('revealed');
         document.body.classList.remove('locked');
         document.getElementById('hero').scrollIntoView({behavior:'smooth'});
-      },850);
+      },950);
     }else{
       error.textContent="That's not quite it — try again.";
     }
@@ -45,7 +50,6 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
       els.d.textContent=els.h.textContent=els.m.textContent=els.s.textContent='0';
       return;
     }
-
     els.d.textContent=Math.floor(diff/86400000);
     els.h.textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
     els.m.textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');

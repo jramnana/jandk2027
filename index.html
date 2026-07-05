@@ -121,10 +121,11 @@
         position: relative;
         z-index: 2;
         width: 100vw;
-        height: 69svh;
-        margin-top: -8svh;
+        height: 72svh;
+        margin-top: -5svh;
         display: grid;
-        place-items:center
+        place-items: center;
+        overflow:visible
     }
 
     .scene-img {
@@ -135,25 +136,26 @@
         max-height: none;
         object-fit: contain;
         transform: translate(-50%, -50%);
-        transition: opacity .9s ease, transform 1.15s cubic-bezier(.2, .8, .2, 1), filter .9s ease;
-        filter: drop-shadow(0 22px 30px rgba(45, 41, 38, .18))
+        transition: opacity 1.05s ease, transform 1.45s cubic-bezier(.19, .72, .18, 1), filter 1.05s ease;
+        filter: drop-shadow(0 22px 30px rgba(45, 41, 38, .18));
+        will-change: transform, opacity, filter
     }
 
     .scene-closed {
-        width: min(92vw, 410px);
+        width: min(90vw, 390px);
         opacity: 1;
-        transform:translate(-50%, -45%) scale(.95)
+        transform:translate(-50%, -45%) scale(.96)
     }
 
     .scene-open {
-        width: min(112vw, 520px);
+        width: min(96vw, 430px);
         opacity: 0;
-        transform:translate(-50%, -47%) scale(.94)
+        transform:translate(-50%, -45%) scale(.82)
     }
 
     .invite.invite-ready .scene-closed {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(.78);
+        transform: translate(-50%, -51%) scale(.74);
         filter:blur(5px)
     }
 
@@ -234,7 +236,7 @@
         position: absolute;
         z-index: 9;
         left: 50%;
-        bottom: 1.5svh;
+        bottom: 2.4svh;
         transform: translate(-50%, 14px);
         width: min(390px, 76vw);
         text-align: center;
@@ -291,16 +293,21 @@
         color:var(--rose-deep)
     }
 
-    .invite.opening .scene-open, .invite.opening .invitation-copy {
+    .invite.opening .scene-open {
         opacity: 0;
-        transform: translate(-50%, -58%) scale(1.04);
+        transform: translate(-50%, -56%) scale(1.03);
         filter:blur(4px)
     }
 
     .invite.opening .gate-form {
         opacity: 0;
         transform: translate(-50%, 20px)
+    }
+
+    .invitation-copy {
+        display: none !important
     }/* SITE */
+
     .eyebrow {
         margin: 0 0 16px;
         font-size: 11px;
@@ -834,24 +841,57 @@
     }
 
     .music-toggle {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 50;
-        width: 44px;
-        height: 44px;
+        display: inline-grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
         border: 1px solid rgba(139, 62, 74, .35);
         border-radius: 50%;
-        background: rgba(251, 248, 244, .7);
-        backdrop-filter: blur(8px);
+        background: rgba(251, 248, 244, .72);
         color: var(--rose-deep);
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 1;
         cursor: pointer;
     }
 
     .music-toggle.playing {
         background: var(--rose-deep);
         color: var(--ivory)
+    }
+
+    .sticky-rsvp {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 80;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 92px;
+        height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--rose-deep);
+        border-radius: 999px;
+        background: var(--rose-deep);
+        color: var(--ivory);
+        text-decoration: none;
+        font-size: 11px;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        box-shadow: 0 10px 24px rgba(45, 41, 38, .18);
+    }
+
+    .sticky-rsvp.hidden {
+        display: none
+    }
+
+    @media (max-width: 760px) {
+        .sticky-rsvp {
+            right: 14px;
+            bottom: 14px;
+            height: 42px;
+            min-width: 84px
+        }
     }
 
     .site-footer {
@@ -934,23 +974,23 @@
         }
 
         .invite-art {
-            width: min(1120px, 96vw);
-            height: min(860px, 80svh);
-            margin-top:-5svh
+            width: min(980px, 94vw);
+            height: min(800px, 78svh);
+            margin-top:-4svh
         }
 
         .scene-closed {
-            width: min(650px, 64vw);
+            width: min(600px, 58vw);
             transform:translate(-50%, -44%) scale(.92)
         }
 
         .scene-open {
-            width: min(760px, 68vw);
-            transform:translate(-50%, -47%) scale(1.04)
+            width: min(620px, 54vw);
+            transform:translate(-50%, -45%) scale(.86)
         }
 
         .invite.invite-ready .scene-open {
-            transform:translate(-50%, -50%) scale(1.06)
+            transform:translate(-50%, -50%) scale(1)
         }
 
         .invitation-copy {
@@ -1099,6 +1139,7 @@
     <button class="music-toggle" id="music-toggle" type="button" aria-label="Toggle background music">♪</button>
     <audio id="bg-music" src="assets/background-music.mp3" loop preload="none"></audio>
 
+    <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">RSVP</a>
     <div id="main-content">
         <header class="site-nav">
             <div class="nav-inner">
@@ -1394,23 +1435,49 @@
     const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzZ6ORqfY32HHcGIlcjeomM4lDtsARNO4wSHAh6arYoJ7QWwTgSUxyqQNPB-MR5VAMQ/exec";
     const OPENOPENOPENWEATHER_API_KEY = "a82b385718fdded8c8bed495de739aca";
     (function() {
-        const invite = document.getElementById("invite"),
-            main = document.getElementById("main-content"),
-            form = document.getElementById("gate-form"),
-            input = document.getElementById("gate-input"),
-            error = document.getElementById("gate-error");
-        if (new URLSearchParams(location.search).get("reset") === "1")
+        const invite = document.getElementById("invite");
+        const main = document.getElementById("main-content");
+        const form = document.getElementById("gate-form");
+        const input = document.getElementById("gate-input");
+        const error = document.getElementById("gate-error");
+        const openImg = document.querySelector(".scene-open");
+        const closedImg = document.querySelector(".scene-closed");
+
+        if (new URLSearchParams(location.search).get("reset") === "1") {
             sessionStorage.removeItem("wedding-unlocked");
+        }
+
         if (sessionStorage.getItem("wedding-unlocked") === "true") {
             invite.classList.add("opened");
             main.classList.add("revealed");
             document.body.classList.remove("locked");
-            return
+            return;
         }
+
+        function beginInviteAnimation() {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    invite.classList.add("invite-ready");
+                    form.setAttribute("aria-hidden", "false");
+                });
+            });
+        }
+
+        // Wait for image decode where possible so the transition does not snap or fail.
+        const decodes = [openImg, closedImg]
+        .filter(Boolean)
+        .map(img => img.decode ? img.decode().catch(() => {}) : Promise.resolve());
+
+        Promise.all(decodes).then(() => {
+            setTimeout(beginInviteAnimation, 700);
+        });
+
+        // Fallback if decode hangs.
         setTimeout(() => {
-            invite.classList.add("invite-ready");
-            form.setAttribute("aria-hidden", "false")
-        }, 900);
+            if (!invite.classList.contains("invite-ready"))
+                beginInviteAnimation();
+        }, 1800);
+
         form.addEventListener("submit", e => {
             e.preventDefault();
             if (input.value.trim().toLowerCase() === SITE_PASSWORD.toLowerCase()) {
@@ -1425,11 +1492,12 @@
                     document.body.classList.remove("locked");
                     document.getElementById("hero").scrollIntoView({
                         behavior: "smooth"
-                    })
-                }, 950)
-            } else
-                error.textContent = "That's not quite it — try again."
-        })
+                    });
+                }, 950);
+            } else {
+                error.textContent = "That's not quite it — try again.";
+            }
+        });
     })();
     (function() {
         const t = new Date(WEDDING_DATE).getTime(),
@@ -1581,6 +1649,7 @@
     })();
 
 
+
     (function() {
         const audio = document.getElementById("bg-music");
         const btn = document.getElementById("music-toggle");
@@ -1588,40 +1657,84 @@
             return;
 
         audio.volume = 0.12;
+        let userPaused = false;
 
-        async function playMusic() {
-            try {
-                await audio.play();
-                btn.classList.add("playing");
-                btn.textContent = "Ⅱ";
-            } catch (e) {
+        function setPlayingState() {
+            if (audio.paused) {
                 btn.classList.remove("playing");
                 btn.textContent = "♪";
+                btn.setAttribute("aria-label", "Play background music");
+            } else {
+                btn.classList.add("playing");
+                btn.textContent = "Ⅱ";
+                btn.setAttribute("aria-label", "Pause background music");
             }
         }
 
-        function pauseMusic() {
-            audio.pause();
-            btn.classList.remove("playing");
-            btn.textContent = "♪";
+        async function playMusic() {
+            if (userPaused)
+                return;
+            try {
+                await audio.play();
+                setPlayingState();
+            } catch (e) {
+                setPlayingState();
+            }
         }
 
-        btn.addEventListener("click", () => {
-            if (audio.paused)
-                playMusic();
-            else
-                pauseMusic();
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (audio.paused) {
+                userPaused = false;
+                audio.play().then(setPlayingState).catch(setPlayingState);
+            } else {
+                userPaused = true;
+                audio.pause();
+                setPlayingState();
+            }
         });
+
+        audio.addEventListener("play", setPlayingState);
+        audio.addEventListener("pause", setPlayingState);
 
         window.addEventListener("load", () => setTimeout(playMusic, 500));
 
         ["pointerdown", "touchstart", "keydown"].forEach(evt => {
-            document.addEventListener(evt, playMusic, {
+            document.addEventListener(evt, () => {
+                if (!userPaused)
+                    playMusic();
+            }, {
                 once: true
             });
         });
 
-        window.startWeddingMusic = playMusic;
+        window.startWeddingMusic = function() {
+            userPaused = false;
+            playMusic();
+        };
+    })();
+
+
+
+    (function() {
+        const sticky = document.getElementById("sticky-rsvp");
+        if (!sticky)
+            return;
+
+        const deadline = new Date("2026-10-15T23:59:59").getTime();
+
+        function updateStickyRsvp() {
+            if (Date.now() > deadline) {
+                sticky.classList.add("hidden");
+            } else {
+                sticky.classList.remove("hidden");
+            }
+        }
+
+        updateStickyRsvp();
+        setInterval(updateStickyRsvp, 3600000);
     })();
     </script>
 </body>

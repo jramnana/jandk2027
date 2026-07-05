@@ -120,8 +120,8 @@
     .invite-art {
         position: relative;
         z-index: 2;
-        width: min(980px, 94vw);
-        height: min(820px, 78svh);
+        width: min(1080px, 96vw);
+        height: min(860px, 80svh);
         margin-top: -5svh
     }
 
@@ -144,7 +144,7 @@
 
     .scene-open {
         opacity: 0;
-        transform: translate(-50%, -47%) scale(.98)
+        transform: translate(-50%, -47%) scale(1.08)
     }
 
     .invite.invite-ready .scene-closed {
@@ -155,16 +155,16 @@
 
     .invite.invite-ready .scene-open {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1.12)
+        transform: translate(-50%, -50%) scale(1.22)
     }
 
     .invitation-copy {
         position: absolute;
         z-index: 5;
         left: 50%;
-        top: 34%;
+        top: 32%;
         transform: translate(-50%, -50%) translateY(14px);
-        width: 31%;
+        width: 29%;
         text-align: center;
         opacity: 0;
         pointer-events: none;
@@ -177,24 +177,24 @@
     }
 
     .invitation-copy p {
-        margin: 0 0 3px;
-        font-size: 8px;
-        line-height: 1.25;
+        margin: 0 0 2px;
+        font-size: 7.2px;
+        line-height: 1.18;
         letter-spacing: .18em;
         text-transform: uppercase;
         color:var(--taupe)
     }
 
     .invite-monogram {
-        width: 185px;
-        height: 142px;
-        margin: 4px auto 4px;
+        width: 170px;
+        height: 130px;
+        margin: 2px auto 2px;
         background:var(--rose-deep)
     }
 
     .invitation-copy h2 {
-        font-size: 25px;
-        line-height: 1;
+        font-size: 23px;
+        line-height: .95;
         letter-spacing: .15em;
         text-transform: uppercase;
         white-space:nowrap
@@ -205,12 +205,12 @@
         width: 34px;
         height: 1px;
         background: var(--rose);
-        margin:7px auto 8px
+        margin:5px auto 5px
     }
 
     .invitation-copy h3 {
-        font-size: 11px;
-        line-height: 1.1;
+        font-size: 10px;
+        line-height: 1.05;
         letter-spacing: .18em;
         text-transform: uppercase;
         color:var(--rose-deep)
@@ -220,9 +220,9 @@
         display: block;
         margin-top: 4px;
         font-family: var(--display);
-        font-size: 11px;
+        font-size: 10px;
         letter-spacing: .05em;
-        line-height: 1.25;
+        line-height: 1.18;
         color: var(--taupe)
     }
 
@@ -370,8 +370,8 @@
     .hero-panel {
         max-width: 820px;
         padding: 64px;
-        background: rgba(251, 248, 244, .62);
-        backdrop-filter: blur(10px);
+        background: rgba(251, 248, 244, .38);
+        backdrop-filter: blur(4px);
         border:1px solid rgba(139, 62, 74, .12)
     }
 
@@ -664,6 +664,43 @@
         text-transform: uppercase
     }
 
+    .nav-rsvp {
+        padding: 9px 14px;
+        border: 1px solid var(--rose-deep);
+        color: var(--rose-deep) !important
+    }
+
+    .rsvp-countdown {
+        margin: 28px auto 30px;
+        display: flex;
+        justify-content: center
+    }
+
+    .rsvp-countdown div {
+        min-width: 160px;
+        padding: 18px 22px;
+        border: 1px solid rgba(139, 62, 74, .22);
+        background: rgba(251, 248, 244, .45)
+    }
+
+    .rsvp-countdown strong {
+        display: block;
+        font-family: var(--display);
+        font-size: 48px;
+        font-weight: 400;
+        line-height: 1;
+        color: var(--rose-deep)
+    }
+
+    .rsvp-countdown span {
+        display: block;
+        margin-top: 6px;
+        font-size: 10px;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: var(--taupe)
+    }
+
     @media (max-width: 900px) {
         .weekend-grid, .image-cards, .split, .travel-path {
             grid-template-columns: 1fr
@@ -714,9 +751,9 @@
         }
 
         .invite-art {
-            width: 98vw;
-            height: min(620px, 62svh);
-            margin-top:-8svh
+            width: 100vw;
+            height: min(660px, 66svh);
+            margin-top:-7svh
         }
 
         .scene-closed {
@@ -724,44 +761,46 @@
         }
 
         .scene-open {
-            transform:translate(-50%, -46%) scale(.8)
+            transform:translate(-50%, -46%) scale(.92)
         }
 
         .invite.invite-ready .scene-open {
-            transform:translate(-50%, -49%) scale(.82)
+            transform:translate(-50%, -49%) scale(.98)
         }
 
         .invitation-copy {
-            top: 29.5%;
-            width:34%
+            top: 27.5%;
+            width:30%
         }
 
         .invitation-copy p {
-            font-size: 4.8px;
-            margin-bottom:1px
+            font-size: 4.2px;
+            margin-bottom: 0;
+            line-height:1.12
         }
 
         .invite-monogram {
-            width: 82px;
-            height: 64px;
-            margin:2px auto
+            width: 72px;
+            height: 56px;
+            margin:1px auto
         }
 
         .invitation-copy h2 {
-            font-size:10px
+            font-size:9px
         }
 
         .invitation-copy i {
-            margin: 4px auto 4px;
-            width:22px
+            margin: 3px auto 3px;
+            width:18px
         }
 
         .invitation-copy h3 {
-            font-size:6.2px
+            font-size:5.6px
         }
 
         .invitation-copy em {
-            font-size:6.8px
+            font-size: 6px;
+            line-height:1.12
         }
 
         .gate-form {
@@ -859,11 +898,7 @@
                 <h2>Jeremy & Kimia</h2>
                 <i></i>
                 <h3>May 27–30, 2027</h3>
-                <em>
-                    Naoussa, Paros
-                    <br>
-                    Greece
-                </em>
+                <em>Naoussa, Paros, Greece</em>
             </div>
         </div>
         <form id="gate-form" class="gate-form" aria-hidden="true">
@@ -887,7 +922,7 @@
                     <a href="#travel">Travel</a>
                     <a href="#stay">Stay</a>
                     <a href="#explore">Paros Guide</a>
-                    <a href="#rsvp">RSVP</a>
+                    <a class="nav-rsvp" href="#rsvp">RSVP</a>
                 </nav>
             </div>
         </header>
@@ -896,7 +931,7 @@
                 <span class="mono hero-monogram"></span>
                 <p class="eyebrow">A wedding weekend in Paros</p>
                 <h1>Jeremy & Kimia</h1>
-                <p class="hero-date">May 27–30, 2027 · Naoussa, Paros</p>
+                <p class="hero-date">May 27–30, 2027 · Naoussa, Paros, Greece</p>
                 <div class="countdown">
                     <div>
                         <strong id="cd-days">–</strong>
@@ -1041,6 +1076,12 @@
                     <p class="eyebrow">RSVP</p>
                     <h2>Kindly reply</h2>
                     <p>Please RSVP by October 15, 2026.</p>
+                    <div class="rsvp-countdown">
+                        <div>
+                            <strong id="rsvp-days">–</strong>
+                            <span>Days to RSVP</span>
+                        </div>
+                    </div>
                     <form id="rsvp-form">
                         <div class="field">
                             <label for="rsvp-name">Full name</label>
@@ -1158,6 +1199,19 @@
             f.style.display = "none";
             c.style.display = "block"
         })
+    })();
+
+    (function() {
+        const el = document.getElementById("rsvp-days");
+        if (!el)
+            return;
+        const target = new Date("2026-10-15T23:59:59").getTime();
+        function tick() {
+            const diff = target - Date.now();
+            el.textContent = diff <= 0 ? "0" : Math.ceil(diff / 86400000);
+        }
+        tick();
+        setInterval(tick, 3600000);
     })();
     </script>
 </body>

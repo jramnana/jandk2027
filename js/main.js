@@ -5,6 +5,7 @@ const WEDDING_DATE = "2027-05-28T16:00:00"; // ISO format, edit to your date/tim
 // ===== ENVELOPE REVEAL FLOW =====
 (function invite() {
   const inviteEl = document.getElementById('invite');
+  const mainContent = document.getElementById('main-content');
   const enterBtn = document.getElementById('invite-enter');
   const envelope = document.getElementById('envelope-wrap');
   const pwForm = document.getElementById('gate-form');
@@ -14,6 +15,7 @@ const WEDDING_DATE = "2027-05-28T16:00:00"; // ISO format, edit to your date/tim
   // If already unlocked this session, skip straight past the invite screen.
   if (sessionStorage.getItem('wedding-unlocked') === 'true') {
     inviteEl.classList.add('opened');
+    mainContent.classList.add('revealed');
   }
 
   // First click on "Enter" reveals the password field instead of jumping straight in.
@@ -37,9 +39,9 @@ const WEDDING_DATE = "2027-05-28T16:00:00"; // ISO format, edit to your date/tim
     envelope.classList.add('opening');
     setTimeout(() => {
       inviteEl.classList.add('opened');
-      const target = document.querySelector('.hero, #story');
+      mainContent.classList.add('revealed');
+      const target = document.querySelector('.site-nav, #story');
       if (target) target.scrollIntoView({ behavior: 'smooth' });
-      else window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     }, 700);
   }
 })();
@@ -86,15 +88,13 @@ const WEDDING_DATE = "2027-05-28T16:00:00"; // ISO format, edit to your date/tim
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
 })();
 
-// ===== INVITE SCREEN HAMBURGER (scrolls to + opens the main nav) =====
+// ===== INVITE SCREEN HAMBURGER (prompts password, same as Enter) =====
 (function inviteNav() {
   const toggle = document.getElementById('nav-toggle-invite');
   if (!toggle) return;
   toggle.addEventListener('click', () => {
-    document.getElementById('invite').classList.add('opened');
-    const header = document.querySelector('.site-nav');
-    header.scrollIntoView({ behavior: 'smooth' });
-    document.getElementById('nav-menu-2').classList.add('open');
+    document.getElementById('gate-form').classList.add('visible');
+    document.getElementById('gate-input').focus();
   });
 })();
 

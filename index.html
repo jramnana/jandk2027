@@ -12,34 +12,39 @@
 <body class="locked">
 
 <section id="invite" class="invite">
-  <img class="invite-bg" src="assets/background.webp" alt="">
+  <picture>
+    <source media="(max-width: 760px)" srcset="assets/background-mobile.webp">
+    <img class="invite-bg" src="assets/background.webp" alt="">
+  </picture>
 
-  <div class="invite-stack" id="invite-stack">
+  <div class="invite-stage" id="invite-stage">
     <img class="layer envelope-back" src="assets/envelope-back.png" alt="">
-    <img class="layer paper" src="assets/paper.png" alt="">
 
-    <div class="paper-copy">
-      <p>Together with their families</p>
-      <p>request the pleasure of your company</p>
-      <p>at the wedding of</p>
+    <div class="paper-wrap">
+      <img class="layer paper" src="assets/paper.png" alt="">
+      <div class="paper-copy">
+        <p>Together with their families</p>
+        <p>request the pleasure of your company</p>
+        <p>at the wedding of</p>
 
-      <img src="assets/monogram.svg" alt="Jeremy and Kimia monogram">
+        <img src="assets/monogram.svg" alt="Jeremy and Kimia monogram">
 
-      <h1>Jeremy & Kimia</h1>
-      <span></span>
-      <h2>May 28, 2027</h2>
-      <em>Naoussa, Paros<br>Greece</em>
+        <h1>Jeremy & Kimia</h1>
+        <span></span>
+        <h2>May 28, 2027</h2>
+        <em>Naoussa, Paros<br>Greece</em>
+      </div>
     </div>
 
     <img class="layer envelope-front" src="assets/envelope-front.png" alt="">
     <img class="layer envelope-flap" src="assets/envelope-flap.png" alt="">
 
-    <button class="wax-seal" id="wax-button" type="button" aria-label="Focus password field">
+    <button class="wax-seal" id="wax-button" type="button" aria-label="Open invitation">
       <img src="assets/wax-seal.png" alt="">
     </button>
   </div>
 
-  <form id="gate-form" class="gate-form">
+  <form id="gate-form" class="gate-form" aria-hidden="true">
     <label for="gate-input">Please enter the password</label>
     <div class="gate-row">
       <input id="gate-input" type="password" placeholder="Enter password" autocomplete="off">

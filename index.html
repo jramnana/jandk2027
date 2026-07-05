@@ -1418,8 +1418,7 @@
 
     try {
         const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=Naoussa,GR&units=metric&appid=${a82b385718fdded8c8bed495de739aca`
-        );
+            `https://api.openweathermap.org/data/2.5/weather?q=Naoussa,GR&units=metric&appid=${OPENWEATHER_API_KEY};
 
         const data = await res.json();
 

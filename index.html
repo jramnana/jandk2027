@@ -58,9 +58,9 @@ a{color:inherit}
 
 .invite-art{
   position:relative; z-index:2;
-  width:min(850px,92vw);
-  height:min(780px,76svh);
-  margin-top:-5svh;
+  width:min(780px,90vw);
+  height:min(720px,72svh);
+  margin-top:-7svh;
 }
 .scene-img{
   position:absolute; left:50%; top:50%; max-width:100%; max-height:100%; object-fit:contain;
@@ -68,27 +68,27 @@ a{color:inherit}
   transition:opacity .9s ease, transform 1.15s cubic-bezier(.2,.8,.2,1), filter .9s ease;
   filter:drop-shadow(0 24px 34px rgba(45,41,38,.18));
 }
-.scene-closed{opacity:1;transform:translate(-50%,-43%) scale(.98)}
-.scene-open{opacity:0;transform:translate(-50%,-44%) scale(1.02)}
+.scene-closed{opacity:1;transform:translate(-50%,-44%) scale(.9)}
+.scene-open{opacity:0;transform:translate(-50%,-45%) scale(.95)}
 .invite.invite-ready .scene-closed{opacity:0;transform:translate(-50%,-48%) scale(.8);filter:blur(5px)}
-.invite.invite-ready .scene-open{opacity:1;transform:translate(-50%,-49%) scale(1.08)}
+.invite.invite-ready .scene-open{opacity:1;transform:translate(-50%,-50%) scale(.98)}
 
 .invitation-copy{
-  position:absolute; z-index:5; left:50%; top:38.5%;
+  position:absolute; z-index:5; left:50%; top:36.5%;
   transform:translate(-50%,-50%) translateY(14px);
-  width:36%; text-align:center; opacity:0; pointer-events:none;
+  width:34%; text-align:center; opacity:0; pointer-events:none;
   transition:opacity .8s ease 1s, transform .8s ease 1s;
 }
 .invite.invite-ready .invitation-copy{opacity:1;transform:translate(-50%,-50%) translateY(0)}
 .invitation-copy p{margin:0 0 4px;font-size:9px;line-height:1.35;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
-.invite-monogram{width:215px;height:165px;margin:8px auto 8px;background:var(--rose-deep)}
-.invitation-copy h2{font-size:31px;line-height:1;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
-.invitation-copy i{display:block;width:38px;height:1px;background:var(--rose);margin:11px auto 12px}
-.invitation-copy h3{font-size:14px;line-height:1.1;letter-spacing:.2em;text-transform:uppercase;color:var(--rose-deep)}
-.invitation-copy em{display:block;margin-top:5px;font-family:var(--display);font-size:14px;letter-spacing:.06em;line-height:1.35;color:var(--taupe)}
+.invite-monogram{width:190px;height:146px;margin:6px auto 6px;background:var(--rose-deep)}
+.invitation-copy h2{font-size:27px;line-height:1;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.invitation-copy i{display:block;width:38px;height:1px;background:var(--rose);margin:8px auto 9px}
+.invitation-copy h3{font-size:12px;line-height:1.1;letter-spacing:.2em;text-transform:uppercase;color:var(--rose-deep)}
+.invitation-copy em{display:block;margin-top:5px;font-family:var(--display);font-size:12px;letter-spacing:.06em;line-height:1.3;color:var(--taupe)}
 
 .gate-form{
-  position:absolute; z-index:9; left:50%; bottom:3.4svh; transform:translate(-50%,14px);
+  position:absolute; z-index:9; left:50%; bottom:2.4svh; transform:translate(-50%,14px);
   width:min(390px,76vw); text-align:center; opacity:0; pointer-events:none;
   transition:opacity .7s ease 1.15s,transform .7s ease 1.15s;
 }
@@ -136,6 +136,18 @@ section{padding:96px 24px}
 .btn{width:100%;padding:14px 24px;border:1px solid var(--rose-deep);background:var(--rose-deep);color:var(--ivory);font-size:12px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
 #rsvp-confirm{display:none}.site-footer{padding:24px;display:flex;flex-wrap:wrap;gap:16px;justify-content:center;background:var(--rose-deep);color:var(--ivory);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
 
+
+.image-cards article{overflow:hidden;padding:0}
+.image-cards img,.event-img{width:100%;height:190px;object-fit:cover;display:block}
+.image-cards h3,.image-cards p{padding-left:24px;padding-right:24px}
+.image-cards h3{padding-top:20px}
+.image-cards p{padding-bottom:22px}
+.event-img{height:240px;margin:-40px -40px 28px;width:calc(100% + 80px)}
+@media(max-width:760px){
+  .image-cards img,.event-img{height:180px}
+  .event-img{margin:-40px -40px 24px;width:calc(100% + 80px)}
+}
+
 @media(max-height:780px){
   .invite-art{height:76svh;width:min(750px,86vw);margin-top:-7svh}
   .gate-form{bottom:2svh}.invitation-copy{top:38%}
@@ -144,15 +156,15 @@ section{padding:96px 24px}
 }
 @media(max-width:760px){
   .invite-bg{object-position:center top}
-  .invite-art{width:96vw;height:min(640px,70svh);margin-top:-3svh}
-  .scene-closed{transform:translate(-50%,-43%) scale(.94)}
-  .scene-open{transform:translate(-50%,-44%) scale(.98)}
-  .invite.invite-ready .scene-open{transform:translate(-50%,-47%) scale(1.08)}
-  .invitation-copy{top:34.5%;width:44%}
+  .invite-art{width:96vw;height:min(560px,63svh);margin-top:-5svh}
+  .scene-closed{transform:translate(-50%,-44%) scale(.78)}
+  .scene-open{transform:translate(-50%,-45%) scale(.82)}
+  .invite.invite-ready .scene-open{transform:translate(-50%,-49%) scale(.9)}
+  .invitation-copy{top:32%;width:38%}
   .invitation-copy p{font-size:5.8px;margin-bottom:2px}
-  .invite-monogram{width:118px;height:92px;margin:5px auto}
-  .invitation-copy h2{font-size:15px}.invitation-copy i{margin:6px auto 7px}.invitation-copy h3{font-size:8.5px}.invitation-copy em{font-size:9.5px}
-  .gate-form{bottom:2svh;width:76vw}.gate-row input{font-size:16px}
+  .invite-monogram{width:92px;height:72px;margin:3px auto}
+  .invitation-copy h2{font-size:12px}.invitation-copy i{margin:6px auto 7px}.invitation-copy h3{font-size:7.5px}.invitation-copy em{font-size:8px}
+  .gate-form{bottom:1.5svh;width:76vw}.gate-row input{font-size:16px}
   .nav-toggle{display:block}.nav-inner nav{display:none;position:absolute;top:100%;left:0;right:0;padding:24px;background:var(--ivory);border-bottom:1px solid var(--line);flex-direction:column;gap:16px}.nav-inner nav.open{display:flex}
   .nav-monogram{width:94px;height:70px}
   .hero{min-height:78vh}.hero-panel{padding:40px 24px}.hero-monogram{width:220px;height:170px}.countdown{gap:10px}.countdown div{min-width:48px}.countdown strong{font-size:28px}.countdown i{height:32px}
@@ -179,7 +191,7 @@ section{padding:96px 24px}
       <span class="mono invite-monogram" aria-label="Jeremy and Kimia monogram"></span>
       <h2>Jeremy & Kimia</h2>
       <i></i>
-      <h3>May 28, 2027</h3>
+      <h3>May 27–30, 2027</h3>
       <em>Naoussa, Paros<br>Greece</em>
     </div>
   </div>
@@ -210,7 +222,7 @@ section{padding:96px 24px}
     <span class="mono hero-monogram" aria-label="Jeremy and Kimia monogram"></span>
     <p class="eyebrow">A wedding weekend in Paros</p>
     <h1>Jeremy & Kimia</h1>
-    <p class="hero-date">May 28, 2027 · Naoussa, Paros</p>
+    <p class="hero-date">May 27–30, 2027 · Naoussa, Paros</p>
     <div class="countdown">
       <div><strong id="cd-days">–</strong><span>Days</span></div><i></i>
       <div><strong id="cd-hours">–</strong><span>Hours</span></div><i></i>
@@ -223,12 +235,16 @@ section{padding:96px 24px}
 <section class="welcome"><div class="narrow"><p class="eyebrow">Welcome</p><h2>Welcome to one of our favourite places in the world.</h2><p>We are so excited to celebrate our love with you in beautiful Paros and can’t wait for an unforgettable weekend together.</p></div></section>
 
 <section id="weekend"><div class="section-inner"><div class="section-head"><p class="eyebrow">The Weekend</p><h2>Three days in Paros</h2></div><div class="timeline">
-<article><span>Thursday · May 27</span><h3>Welcome Get Together</h3><p>Stilvi Restaurant<br>6:00 PM – 10:00 PM</p><a href="https://www.google.com/maps/search/?api=1&query=Stilvi+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+<article><img class="event-img" src="assets/stilvi.jpg" alt="Stilvi Restaurant"><span>Thursday · May 27</span><h3>Welcome Get Together</h3><p>Stilvi Restaurant<br>6:00 PM – 10:00 PM</p><a href="https://www.google.com/maps/search/?api=1&query=Stilvi+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a></article>
 <article><span>Friday · May 28</span><h3>Wedding Ceremony & Reception</h3><p>Monastiri Beach Bar & Restaurant Amphitheater<br>6:00 PM ceremony, followed by cocktail hour, dinner, and reception until 2:00 AM.</p><a href="https://www.google.com/maps/search/?api=1&query=Monastiri+Beach+Bar+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a></article>
 <article><span>Saturday · May 29</span><h3>Pool Party Day</h3><p>A relaxed day to swim, recover, and enjoy the island together. Details to come.</p></article>
 </div></div></section>
 
-<section id="stay" class="soft"><div class="section-inner split"><div><p class="eyebrow">Stay</p><h2>Naoussa will be home base.</h2><p>We recommend staying in or near Naoussa so you’re close to restaurants, nightlife, and transportation throughout the weekend.</p></div><div class="cards"><article><h3>Adonis Hotel</h3><p>Primary recommendation.</p></article><article><h3>La Maltese Boutique</h3><p>Secondary recommendation.</p></article><article><h3>Boutique stays in Naoussa</h3><p>There are many beautiful hotels and guesthouses nearby.</p></article></div></div></section>
+<section id="stay" class="soft"><div class="section-inner split"><div><p class="eyebrow">Stay</p><h2>Naoussa will be home base.</h2><p>We recommend staying in or near Naoussa so you’re close to restaurants, nightlife, and transportation throughout the weekend.</p></div><div class="cards image-cards">
+<article><img src="assets/adonis.jpg" alt="Adonis Hotel"><h3>Adonis Hotel</h3><p>Primary recommendation.</p></article>
+<article><img src="assets/la-maltese.jpg" alt="La Maltese"><h3>La Maltese Boutique</h3><p>Secondary recommendation.</p></article>
+<article><h3>Boutique stays in Naoussa</h3><p>There are many beautiful hotels and guesthouses nearby.</p></article>
+</div></div></section>
 
 <section id="travel"><div class="section-inner"><div class="section-head"><p class="eyebrow">Travel</p><h2>Getting to Paros</h2><p>Most guests will fly into Athens, then continue to Paros by either domestic flight or ferry.</p></div><div class="travel-path"><article><span>01</span><h3>Fly to Athens</h3><p>Athens International Airport is the main international entry point.</p></article><article><span>02</span><h3>Fly to Paros</h3><p>There are short domestic flights from Athens to Paros.</p></article><article><span>03</span><h3>Or take the ferry</h3><p>Ferries from Athens to Paros are another common option.</p></article></div><p class="weather-note">Weather note: late May in Paros is typically warm during the day and cooler in the evening. We’ll add a live forecast closer to the wedding.</p></div></section>
 
@@ -236,7 +252,7 @@ section{padding:96px 24px}
 
 <section id="rsvp"><div class="section-inner"><div class="rsvp-panel"><p class="eyebrow">RSVP</p><h2>Kindly reply</h2><p>Formal RSVP will be added here once invitations are sent.</p><form id="rsvp-form"><div class="field"><label for="rsvp-name">Full name</label><input id="rsvp-name" type="text" required placeholder="Your name"></div><div class="field"><label for="rsvp-attend">Will you attend?</label><select id="rsvp-attend"><option>Joyfully attending</option><option>Regretfully declining</option></select></div><div class="field"><label for="rsvp-note">Dietary needs or note</label><textarea id="rsvp-note" rows="3"></textarea></div><button type="submit" class="btn">Send RSVP</button></form><div id="rsvp-confirm"><h3>Thank you.</h3><p>Your RSVP has been noted.</p></div></div></div></section>
 
-<footer class="site-footer"><span>Jeremy & Kimia</span><span>·</span><span>Paros, Greece</span><span>·</span><span>May 28, 2027</span></footer>
+<footer class="site-footer"><span>Jeremy & Kimia</span><span>·</span><span>Paros, Greece</span><span>·</span><span>May 27–30, 2027</span></footer>
 </div>
 
 <script>

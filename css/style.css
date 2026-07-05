@@ -401,6 +401,20 @@ a { color: inherit; }
   .invite-iconnav { gap: var(--space-3); }
 }
 
+/* ===== MAIN CONTENT (hidden until password entered) ===== */
+#main-content {
+  display: none;
+  opacity: 0;
+}
+#main-content.revealed {
+  display: block;
+  animation: contentReveal 0.9s ease forwards;
+}
+@keyframes contentReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== NAV ===== */
 header.site-nav {
   position: sticky;

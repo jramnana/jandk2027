@@ -148,6 +148,74 @@ section{padding:96px 24px}
   .event-img{margin:-40px -40px 24px;width:calc(100% + 80px)}
 }
 
+
+.weekend-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.weekend-card{
+  position:relative;
+  padding:0 0 28px;
+  border:1px solid var(--line);
+  border-left:1px solid var(--line) !important;
+  background:rgba(255,255,255,.55);
+  overflow:hidden;
+}
+.weekend-card h3,.weekend-card p,.weekend-card a,.weekend-card .event-meta{
+  margin-left:24px;
+  margin-right:24px;
+}
+.event-img,.event-photo{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+  display:block;
+  margin:0 0 22px 0;
+}
+.placeholder-photo{
+  display:grid;
+  place-items:center;
+  background:
+    linear-gradient(rgba(139,62,74,.18),rgba(251,248,244,.72)),
+    url("assets/naoussa-paros.webp");
+  background-size:cover;
+  background-position:center;
+  font-family:var(--display);
+  font-size:34px;
+  color:var(--rose-deep);
+}
+.event-meta{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.event-meta span{
+  font-family:var(--display);
+  font-size:34px;
+  color:var(--rose-deep);
+}
+.event-meta small{
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--taupe);
+}
+.image-cards article{overflow:hidden;padding:0}
+.image-cards img{width:100%;height:220px;object-fit:cover;display:block}
+.image-cards h3,.image-cards p{padding-left:24px;padding-right:24px}
+.image-cards h3{padding-top:20px}
+.image-cards p{padding-bottom:24px}
+.stay-cards{grid-template-columns:1fr 1fr}
+@media(max-width:900px){
+  .weekend-grid{grid-template-columns:1fr}
+  .stay-cards{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .event-img,.event-photo,.image-cards img{height:190px}
+}
+
 @media(max-height:780px){
   .invite-art{height:76svh;width:min(750px,86vw);margin-top:-7svh}
   .gate-form{bottom:2svh}.invitation-copy{top:38%}
@@ -234,23 +302,58 @@ section{padding:96px 24px}
 
 <section class="welcome"><div class="narrow"><p class="eyebrow">Welcome</p><h2>Welcome to one of our favourite places in the world.</h2><p>We are so excited to celebrate our love with you in beautiful Paros and can’t wait for an unforgettable weekend together.</p></div></section>
 
-<section id="weekend"><div class="section-inner"><div class="section-head"><p class="eyebrow">The Weekend</p><h2>Three days in Paros</h2></div><div class="timeline">
-<article><img class="event-img" src="assets/stilvi.jpg" alt="Stilvi Restaurant"><span>Thursday · May 27</span><h3>Welcome Get Together</h3><p>Stilvi Restaurant<br>6:00 PM – 10:00 PM</p><a href="https://www.google.com/maps/search/?api=1&query=Stilvi+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a></article>
-<article><span>Friday · May 28</span><h3>Wedding Ceremony & Reception</h3><p>Monastiri Beach Bar & Restaurant Amphitheater<br>6:00 PM ceremony, followed by cocktail hour, dinner, and reception until 2:00 AM.</p><a href="https://www.google.com/maps/search/?api=1&query=Monastiri+Beach+Bar+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a></article>
-<article><span>Saturday · May 29</span><h3>Pool Party Day</h3><p>A relaxed day to swim, recover, and enjoy the island together. Details to come.</p></article>
+<section id="weekend"><div class="section-inner"><div class="section-head"><p class="eyebrow">The Weekend</p><h2>Three days in Paros</h2></div><div class="timeline weekend-grid">
+<article class="weekend-card">
+  <img class="event-img" src="assets/stilvi.jpg" alt="Stilvi Restaurant">
+  <div class="event-meta"><span>01</span><small>Thursday · May 27</small></div>
+  <h3>Welcome Get Together</h3>
+  <p>Stilvi Restaurant<br>7:30 PM – 12:00 AM</p>
+  <a href="https://www.google.com/maps/search/?api=1&query=Stilvi+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
+</article>
+
+<article class="weekend-card">
+  <div class="event-photo placeholder-photo">Wedding Day</div>
+  <div class="event-meta"><span>02</span><small>Friday · May 28</small></div>
+  <h3>Wedding Ceremony & Reception</h3>
+  <p>Monastiri Beach Bar & Restaurant<br>6:00 PM ceremony, followed by cocktail hour, dinner, and reception until 2:00 AM.</p>
+  <a href="https://www.google.com/maps/search/?api=1&query=Monastiri+Beach+Bar+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
+</article>
+
+<article class="weekend-card">
+  <div class="event-photo placeholder-photo">Pool Party</div>
+  <div class="event-meta"><span>03</span><small>Saturday · May 29</small></div>
+  <h3>Pool Party Day</h3>
+  <p>Pool party at the hotel. A relaxed day to swim, recover, and enjoy the island together.</p>
+</article>
 </div></div></section>
 
-<section id="stay" class="soft"><div class="section-inner split"><div><p class="eyebrow">Stay</p><h2>Naoussa will be home base.</h2><p>We recommend staying in or near Naoussa so you’re close to restaurants, nightlife, and transportation throughout the weekend.</p></div><div class="cards image-cards">
-<article><img src="assets/adonis.jpg" alt="Adonis Hotel"><h3>Adonis Hotel</h3><p>Primary recommendation.</p></article>
-<article><img src="assets/la-maltese.jpg" alt="La Maltese"><h3>La Maltese Boutique</h3><p>Secondary recommendation.</p></article>
-<article><h3>Boutique stays in Naoussa</h3><p>There are many beautiful hotels and guesthouses nearby.</p></article>
-</div></div></section>
+<section id="stay" class="soft">
+  <div class="section-inner split">
+    <div>
+      <p class="eyebrow">Stay</p>
+      <h2>Naoussa will be home base.</h2>
+      <p>We’ve reserved special pricing with Adonis Hotel and its sister hotel next door. Breakfast is included, and staying here will keep guests close to the weekend plans and transportation.</p>
+    </div>
+    <div class="cards image-cards stay-cards">
+      <article>
+        <img src="assets/adonis.jpg" alt="Adonis Hotel">
+        <h3>Adonis Hotel</h3>
+        <p>Reserved room block with special pricing. Breakfast included.</p>
+      </article>
+      <article>
+        <img src="assets/la-maltese.jpg" alt="La Maltese">
+        <h3>La Maltese Boutique</h3>
+        <p>Sister hotel next door with special pricing. Breakfast included.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section id="travel"><div class="section-inner"><div class="section-head"><p class="eyebrow">Travel</p><h2>Getting to Paros</h2><p>Most guests will fly into Athens, then continue to Paros by either domestic flight or ferry.</p></div><div class="travel-path"><article><span>01</span><h3>Fly to Athens</h3><p>Athens International Airport is the main international entry point.</p></article><article><span>02</span><h3>Fly to Paros</h3><p>There are short domestic flights from Athens to Paros.</p></article><article><span>03</span><h3>Or take the ferry</h3><p>Ferries from Athens to Paros are another common option.</p></article></div><p class="weather-note">Weather note: late May in Paros is typically warm during the day and cooler in the evening. We’ll add a live forecast closer to the wedding.</p></div></section>
 
 <section id="explore" class="soft"><div class="section-inner"><div class="section-head"><p class="eyebrow">Paros Guide</p><h2>Our favourite places on the island.</h2><p>Restaurants, beaches, coffee, cocktails, and island recommendations will be added here.</p></div></div></section>
 
-<section id="rsvp"><div class="section-inner"><div class="rsvp-panel"><p class="eyebrow">RSVP</p><h2>Kindly reply</h2><p>Formal RSVP will be added here once invitations are sent.</p><form id="rsvp-form"><div class="field"><label for="rsvp-name">Full name</label><input id="rsvp-name" type="text" required placeholder="Your name"></div><div class="field"><label for="rsvp-attend">Will you attend?</label><select id="rsvp-attend"><option>Joyfully attending</option><option>Regretfully declining</option></select></div><div class="field"><label for="rsvp-note">Dietary needs or note</label><textarea id="rsvp-note" rows="3"></textarea></div><button type="submit" class="btn">Send RSVP</button></form><div id="rsvp-confirm"><h3>Thank you.</h3><p>Your RSVP has been noted.</p></div></div></div></section>
+<section id="rsvp"><div class="section-inner"><div class="rsvp-panel"><p class="eyebrow">RSVP</p><h2>Kindly reply</h2><p>Please RSVP by October 15, 2026.</p><form id="rsvp-form"><div class="field"><label for="rsvp-name">Full name</label><input id="rsvp-name" type="text" required placeholder="Your name"></div><div class="field"><label for="rsvp-attend">Will you attend?</label><select id="rsvp-attend"><option>Joyfully attending</option><option>Regretfully declining</option></select></div><div class="field"><label for="rsvp-note">Dietary needs or note</label><textarea id="rsvp-note" rows="3"></textarea></div><button type="submit" class="btn">Send RSVP</button></form><div id="rsvp-confirm"><h3>Thank you.</h3><p>Your RSVP has been noted.</p></div></div></div></section>
 
 <footer class="site-footer"><span>Jeremy & Kimia</span><span>·</span><span>Paros, Greece</span><span>·</span><span>May 27–30, 2027</span></footer>
 </div>

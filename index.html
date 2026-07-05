@@ -335,8 +335,8 @@
     }
 
     .nav-monogram {
-        width: 94px;
-        height:70px
+        width: 112px;
+        height:84px
     }
 
     .nav-tools {
@@ -464,7 +464,15 @@
     .countdown i {
         height: 32px;
         width: 1px;
-        background:rgba(107, 97, 86, .25)
+        background: rgba(107, 97, 86, .25)
+    }
+
+    .hero-weather {
+        margin: 12px 0 0;
+        font-size: 12px;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--rose-deep);
     }
 
     .hero-rsvp {
@@ -822,7 +830,28 @@
     }
 
     .faq-item h3 {
-        font-size:28px
+        font-size: 28px
+    }
+
+    .music-toggle {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 50;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(139, 62, 74, .35);
+        border-radius: 50%;
+        background: rgba(251, 248, 244, .7);
+        backdrop-filter: blur(8px);
+        color: var(--rose-deep);
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .music-toggle.playing {
+        background: var(--rose-deep);
+        color: var(--ivory)
     }
 
     .site-footer {
@@ -836,6 +865,67 @@
         font-size: 11px;
         letter-spacing: .16em;
         text-transform: uppercase
+    }
+
+    .travel-guide {
+        display: grid;
+        gap: 24px
+    }
+
+    .travel-guide-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, .52);
+        overflow: hidden;
+    }
+
+    .travel-guide-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+    }
+
+    .travel-guide-card div {
+        padding: 26px
+    }
+
+    .travel-guide-card span {
+        display: block;
+        font-family: var(--display);
+        font-size: 42px;
+        line-height: 1;
+        color: var(--rose-deep);
+        margin-bottom: 10px;
+    }
+
+    .travel-guide-card h3 {
+        font-size: 34px
+    }
+
+    .travel-guide-card a {
+        display: inline-block;
+        margin: 10px 14px 0 0;
+        font-size: 11px;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--rose-deep);
+        border-bottom: 1px solid currentColor;
+    }
+
+    @media (min-width: 761px) {
+        .travel-guide-card {
+            grid-template-columns: 42% 58%;
+            align-items: stretch
+        }
+
+        .travel-guide-card img {
+            height: 100%;
+            min-height: 280px
+        }
     }
 
     @media (min-width: 761px) {
@@ -1015,6 +1105,10 @@
             <div class="gate-error" id="gate-error"></div>
         </form>
     </section>
+
+    <button class="music-toggle" id="music-toggle" type="button" aria-label="Toggle background music">♪</button>
+    <audio id="bg-music" src="assets/background-music.mp3" loop preload="none"></audio>
+
     <div id="main-content">
         <header class="site-nav">
             <div class="nav-inner">
@@ -1022,7 +1116,6 @@
                     <span class="mono nav-monogram"></span>
                 </a>
                 <div class="nav-tools">
-                    <span class="weather-pill" id="weather-pill">Paros weather</span>
                     <button class="nav-toggle" id="nav-toggle">☰</button>
                 </div>
                 <nav id="nav-menu">
@@ -1040,6 +1133,7 @@
                 <p class="eyebrow">A wedding weekend in Paros</p>
                 <h1>Jeremy & Kimia</h1>
                 <p class="hero-date">May 27–30, 2027 · Naoussa, Paros, Greece</p>
+                <p class="hero-weather" id="weather-pill">Paros weather loading...</p>
                 <div class="countdown">
                     <div>
                         <strong id="cd-days">–</strong>
@@ -1135,43 +1229,40 @@
                 <div class="section-head">
                     <p class="eyebrow">Travel</p>
                     <h2>Getting to Paros</h2>
-                    <p>Most guests will fly into Athens, then continue to Paros by either domestic flight or ferry.</p>
+                    <p>Most guests will fly into Athens, then continue to Paros by either a short domestic flight or ferry.</p>
                 </div>
-                <div class="travel-path">
-                    <article>
-                        <span>01</span>
-                        <h3>Fly to Athens</h3>
-                        <p>Athens International Airport is the main international entry point.</p>
+
+                <div class="travel-guide">
+                    <article class="travel-guide-card">
+                        <img src="assets/travel-athens.jpg" alt="Athens">
+                        <div>
+                            <span>01</span>
+                            <h3>Fly to Athens</h3>
+                            <p>Athens International Airport is the main international entry point. Search your best route into ATH first.</p>
+                            <a href="https://www.google.com/travel/flights?q=flights%20to%20Athens%20Greece" target="_blank" rel="noopener">Search Google Flights →</a>
+                        </div>
                     </article>
-                    <article>
-                        <span>02</span>
-                        <h3>Fly to Paros</h3>
-                        <p>Book Athens to Paros National Airport (PAS) with Aegean/Olympic Air.</p>
+
+                    <article class="travel-guide-card">
+                        <img src="assets/travel-plane.jpg" alt="Flight to Paros">
+                        <div>
+                            <span>02</span>
+                            <h3>Fly Athens to Paros</h3>
+                            <p>The fastest option is a short domestic flight from Athens to Paros National Airport (PAS) with Aegean/Olympic Air.</p>
+                            <a href="https://en.aegeanair.com/" target="_blank" rel="noopener">Book Aegean →</a>
+                        </div>
                     </article>
-                    <article>
-                        <span>03</span>
-                        <h3>Or take the ferry</h3>
-                        <p>Ferries usually leave from Piraeus and vary by season, operator, and speed.</p>
-                    </article>
-                </div>
-                <div class="travel-links">
-                    <article class="travel-card">
-                        <h3>Flights to Athens</h3>
-                        <p>Search your best route into Athens International Airport.</p>
-                        <a href="https://www.google.com/travel/flights?q=flights%20to%20Athens%20Greece" target="_blank">Google Flights →</a>
-                    </article>
-                    <article class="travel-card">
-                        <h3>Athens to Paros</h3>
-                        <p>Search ATH to PAS on Aegean/Olympic Air.</p>
-                        <a href="https://en.aegeanair.com/" target="_blank">Aegean Airlines →</a>
-                    </article>
-                    <article class="travel-card">
-                        <h3>Ferries</h3>
-                        <p>Typical one-way economy ranges often start around €50–€70 for conventional ferries and can be higher for high-speed options. Prices will change for 2027.</p>
-                        <a href="https://www.ferryhopper.com/en/ferry-routes/direct/athens-paros" target="_blank">Ferryhopper →</a>
-                        <a href="https://www.bluestarferries.com/en-gb" target="_blank">Blue Star →</a>
-                        <a href="https://www.seajets.com/" target="_blank">Seajets →</a>
-                        <small>Check final schedules and pricing closer to booking.</small>
+
+                    <article class="travel-guide-card">
+                        <img src="assets/travel-ferry.jpg" alt="Ferry to Paros">
+                        <div>
+                            <span>03</span>
+                            <h3>Or take the ferry</h3>
+                            <p>Ferries usually leave from Piraeus. One-way economy often starts around €50–€70 for conventional ferries and can be higher for high-speed options. Final 2027 pricing will vary.</p>
+                            <a href="https://www.ferryhopper.com/en/ferry-routes/direct/athens-paros" target="_blank" rel="noopener">Ferryhopper →</a>
+                            <a href="https://www.bluestarferries.com/en-gb" target="_blank" rel="noopener">Blue Star →</a>
+                            <a href="https://www.seajets.com/" target="_blank" rel="noopener">Seajets →</a>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -1310,8 +1401,8 @@
     <script>
     const SITE_PASSWORD = "ourday2027";
     const WEDDING_DATE = "2027-05-28T18:00:00";
-    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzQmzYAHICp3gIT-2xm3yLu4sradYBG6rtzt9IqmHLZqsYI6qoiVeDP6s4prnE99gDy/exec";
-    const OPENOPENWEATHER_API_KEY = "a82b385718fdded8c8bed495de739aca";
+    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzZ6ORqfY32HHcGIlcjeomM4lDtsARNO4wSHAh6arYoJ7QWwTgSUxyqQNPB-MR5VAMQ/exec";
+    const OPENOPENOPENWEATHER_API_KEY = "a82b385718fdded8c8bed495de739aca";
     (function() {
         const invite = document.getElementById("invite"),
             main = document.getElementById("main-content"),
@@ -1454,12 +1545,12 @@
     })();
     (async function() {
         const el = document.getElementById("weather-pill");
-        if (!el || !OPENOPENWEATHER_API_KEY)
+        if (!el || !OPENOPENOPENWEATHER_API_KEY)
             return;
 
         try {
             // Naoussa, Paros approximate coordinates. More reliable than city search.
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=37.1230&lon=25.2400&units=metric&appid=${OPENOPENWEATHER_API_KEY}`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=37.1230&lon=25.2400&units=metric&appid=${OPENOPENOPENWEATHER_API_KEY}`;
             const res = await fetch(url);
             const data = await res.json();
 
@@ -1473,6 +1564,28 @@
             console.warn("OpenWeather failed:", e);
             el.textContent = "Paros weather";
         }
+    })();
+
+    (function() {
+        const btn = document.getElementById("music-toggle");
+        const audio = document.getElementById("bg-music");
+        if (!btn || !audio)
+            return;
+        btn.addEventListener("click", async () => {
+            try {
+                if (audio.paused) {
+                    await audio.play();
+                    btn.classList.add("playing");
+                    btn.textContent = "Ⅱ";
+                } else {
+                    audio.pause();
+                    btn.classList.remove("playing");
+                    btn.textContent = "♪";
+                }
+            } catch (e) {
+                console.warn("Audio playback blocked:", e);
+            }
+        });
     })();
     </script>
 </body>

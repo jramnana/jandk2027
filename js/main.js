@@ -7,15 +7,10 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
   const form=document.getElementById('gate-form');
   const input=document.getElementById('gate-input');
   const error=document.getElementById('gate-error');
-  const closedSeal=document.getElementById('closed-seal');
-  const wax=document.getElementById('wax-button');
 
   if(new URLSearchParams(window.location.search).get('reset') === '1'){
     sessionStorage.removeItem('wedding-unlocked');
   }
-
-  if(wax){ wax.addEventListener('click',()=>input.focus()); }
-  if(closedSeal){ closedSeal.addEventListener('click',()=>startOpen()); }
 
   if(sessionStorage.getItem('wedding-unlocked')==='true'){
     inviteEl.classList.add('opened');
@@ -24,19 +19,11 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
     return;
   }
 
-  let hasOpened = false;
-  function startOpen(){
-    if(hasOpened) return;
-    hasOpened = true;
+  window.setTimeout(()=>{
     inviteEl.classList.add('invite-ready');
-    setTimeout(()=>{
-      form.setAttribute('aria-hidden','false');
-      input.focus({preventScroll:true});
-    }, 850);
-  }
-
-  // Automatically open after load.
-  window.setTimeout(startOpen, 900);
+    form.setAttribute('aria-hidden','false');
+    input.focus({preventScroll:true});
+  }, 900);
 
   form.addEventListener('submit',(e)=>{
     e.preventDefault();

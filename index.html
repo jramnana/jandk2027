@@ -1290,7 +1290,7 @@
     const SITE_PASSWORD = "ourday2027";
     const WEDDING_DATE = "2027-05-28T18:00:00";
     const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzZ6ORqfY32HHcGIlcjeomM4lDtsARNO4wSHAh6arYoJ7QWwTgSUxyqQNPB-MR5VAMQ/exec";
-    const OPENWEATHER_API_KEY = "a82b385718fdded8c8bed495de739aca";
+    const OPENOPENWEATHER_API_KEY = "PASTE_YOUR_OPENOPENWEATHER_API_KEY_HERE";
     (function() {
         const invite = document.getElementById("invite"),
             main = document.getElementById("main-content"),
@@ -1412,22 +1412,23 @@
             }
         })
     })();
-(async function () {
-    const el = document.getElementById("weather-pill");
-    if (!el || !OPENWEATHER_API_KEY) return;
+    (async function() {
+        const el = document.getElementById("weather-pill");
+        if (!el || OPENOPENWEATHER_API_KEY.includes("a82b385718fdded8c8bed495de739aca"))
+            return;
 
-    try {
-        const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=Naoussa,GR&units=metric&appid=${OPENWEATHER_API_KEY};
+        try {
+            const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Naoussa,GR&units=metric&appid=${OPENOPENWEATHER_API_KEY}`);
+            const data = await res.json();
 
-        const data = await res.json();
-
-        el.textContent =
-            `${Math.round(data.main.temp)}°C · ${data.weather[0].main}`;
-    } catch (e) {
-        el.textContent = "Paros Weather";
-    }
-})();
+            if (data && data.main && data.weather && data.weather[0]) {
+                el.textContent = `Paros ${Math.round(data.main.temp)}°C · ${data.weather[0].main}`;
+            } else {
+                el.textContent = "Paros weather";
+            }
+        } catch (e) {
+            el.textContent = "Paros weather";
+        }
     })();
     </script>
 </body>

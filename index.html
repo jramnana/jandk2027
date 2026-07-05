@@ -12,28 +12,27 @@
 <body class="locked">
 
 <section id="invite" class="invite">
-  <div class="flower flower-tr"></div>
-  <div class="flower flower-bl"></div>
+  <img class="asset-bg" src="assets/background.webp" alt="">
 
-  <div class="scene" id="scene">
-    <div class="envelope-back"></div>
+  <div class="invite-stage" id="invite-stage">
+    <img class="asset envelope-back" src="assets/envelope-back.png" alt="">
+    <img class="asset paper" src="assets/paper.png" alt="Wedding invitation">
 
-    <article class="invitation-card" id="invitation-card">
-      <p class="invite-line">Together with their families</p>
-      <p class="invite-line">request the pleasure of your company</p>
-      <p class="invite-line">at the wedding of</p>
-
-      <img class="svg-monogram card-mark" src="assets/monogram.svg" alt="Jeremy and Kimia monogram">
-
+    <div class="paper-text">
+      <p>Together with their families</p>
+      <p>request the pleasure of your company</p>
+      <p>at the wedding of</p>
+      <img class="paper-monogram" src="assets/monogram.svg" alt="Jeremy and Kimia monogram">
       <h1>Jeremy & Kimia</h1>
-      <div class="mini-rule"></div>
-      <p class="card-date">May 28, 2027</p>
-      <p class="card-place">Naoussa, Paros<br>Greece</p>
-    </article>
+      <span></span>
+      <h2>May 28, 2027</h2>
+      <em>Naoussa, Paros<br>Greece</em>
+    </div>
 
-    <div class="envelope-front"></div>
-    <button class="wax-seal" id="seal-button" type="button" aria-label="Enter password">
-      <img class="seal-monogram" src="assets/monogram.svg" alt="">
+    <img class="asset envelope-front" src="assets/envelope-front.png" alt="">
+    <img class="asset envelope-flap" src="assets/envelope-flap.png" alt="">
+    <button class="wax-button" id="wax-button" type="button" aria-label="Focus password">
+      <img src="assets/wax-seal.png" alt="">
     </button>
   </div>
 
@@ -48,12 +47,9 @@
 </section>
 
 <div id="main-content">
-
 <header class="site-nav">
   <div class="nav-inner">
-    <a class="brand" href="#hero" aria-label="Back to top">
-      <img src="assets/monogram.svg" alt="Jeremy and Kimia">
-    </a>
+    <a class="brand" href="#hero"><img src="assets/monogram.svg" alt="J&K"></a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Menu">&#9776;</button>
     <nav id="nav-menu">
       <a href="#weekend">Weekend</a>
@@ -67,7 +63,7 @@
 
 <section id="hero" class="hero">
   <div class="hero-panel">
-    <img class="svg-monogram hero-mark" src="assets/monogram.svg" alt="Jeremy and Kimia monogram">
+    <img class="hero-monogram" src="assets/monogram.svg" alt="Jeremy and Kimia monogram">
     <p class="eyebrow">A wedding weekend in Paros</p>
     <h1>Jeremy & Kimia</h1>
     <p class="hero-date">May 28, 2027 · Naoussa, Paros</p>
@@ -130,7 +126,6 @@
       <h2>Naoussa will be home base.</h2>
       <p>We recommend staying in or near Naoussa so you’re close to restaurants, nightlife, and transportation throughout the weekend.</p>
     </div>
-
     <div class="cards">
       <article><h3>Adonis Hotel</h3><p>Primary recommendation.</p></article>
       <article><h3>La Maltese Boutique</h3><p>Secondary recommendation.</p></article>
@@ -146,13 +141,11 @@
       <h2>Getting to Paros</h2>
       <p>Most guests will fly into Athens, then continue to Paros by either domestic flight or ferry.</p>
     </div>
-
     <div class="travel-path">
       <article><span>01</span><h3>Fly to Athens</h3><p>Athens International Airport is the main international entry point.</p></article>
       <article><span>02</span><h3>Fly to Paros</h3><p>There are short domestic flights from Athens to Paros.</p></article>
       <article><span>03</span><h3>Or take the ferry</h3><p>Ferries from Athens to Paros are another common option.</p></article>
     </div>
-
     <p class="weather-note">Weather note: late May in Paros is typically warm during the day and cooler in the evening. We’ll add a live forecast closer to the wedding.</p>
   </div>
 </section>
@@ -173,14 +166,12 @@
       <p class="eyebrow">RSVP</p>
       <h2>Kindly reply</h2>
       <p>Formal RSVP will be added here once invitations are sent.</p>
-
       <form id="rsvp-form">
         <div class="field"><label for="rsvp-name">Full name</label><input id="rsvp-name" type="text" required placeholder="Your name"></div>
         <div class="field"><label for="rsvp-attend">Will you attend?</label><select id="rsvp-attend"><option>Joyfully attending</option><option>Regretfully declining</option></select></div>
         <div class="field"><label for="rsvp-note">Dietary needs or note</label><textarea id="rsvp-note" rows="3"></textarea></div>
         <button type="submit" class="btn">Send RSVP</button>
       </form>
-
       <div id="rsvp-confirm"><h3>Thank you.</h3><p>Your RSVP has been noted.</p></div>
     </div>
   </div>
@@ -189,7 +180,6 @@
 <footer class="site-footer">
   <span>Jeremy & Kimia</span><span>·</span><span>Paros, Greece</span><span>·</span><span>May 28, 2027</span>
 </footer>
-
 </div>
 
 <script src="js/main.js"></script>

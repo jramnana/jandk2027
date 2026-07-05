@@ -1,4 +1,4 @@
-/* Project Paros — fixed invite open animation */
+/* Project Paros — closed-to-open invite sequence */
 :root{
   --ivory:#FBF8F4;--stone:#E7E2DA;--soft-blush:#F3D8DC;--dusty-rose:#B86773;--deep-rose:#8B3E4A;--taupe:#6B6156;--ink:#2D2926;--line:rgba(107,97,86,.22);
   --display:'Cormorant Garamond',serif;--body:'Inter',sans-serif;
@@ -39,37 +39,80 @@ p{color:var(--taupe)}a{color:inherit}
 .invite picture{position:absolute;inset:0;display:block}
 .invite-bg{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 
-.invite-stage{
+.invite-composition{
   position:relative;
   z-index:2;
-  width:min(680px,88vw);
+  width:min(690px,88vw);
   height:min(760px,80svh);
   margin-top:-3svh;
 }
-.layer{position:absolute;display:block;max-width:none;user-select:none;pointer-events:none}
 
-/* Layer order:
-   back envelope -> paper -> front envelope/wax.
-   Flap is only visible during the first opening motion, then removed. */
-.envelope-back{
+/* CLOSED ENVELOPE */
+.closed-envelope{
+  position:absolute;
+  z-index:8;
+  left:50%;
+  top:50%;
+  width:78%;
+  transform:translate(-50%,-40%);
+  opacity:1;
+  transition:opacity .55s ease, transform .75s ease;
+}
+.closed-front{
+  width:100%;
+  display:block;
+  filter:drop-shadow(0 25px 34px rgba(45,41,38,.18));
+}
+.closed-seal{
+  position:absolute;
+  left:50%;
+  top:52%;
+  transform:translate(-50%,-50%);
+  width:86px;
+  height:86px;
+  padding:0;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+}
+.closed-seal img{width:100%;height:100%;object-fit:contain;display:block}
+
+/* OPEN COMPOSITION */
+.open-envelope{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:translateY(14px) scale(.98);
+  transition:opacity .75s ease, transform .9s cubic-bezier(.2,.8,.2,1);
+}
+.env-back{
+  position:absolute;
   z-index:1;
   width:95%;
   left:2.5%;
   bottom:8%;
+  display:block;
 }
-
-.paper-wrap{
+.invitation-paper{
   position:absolute;
   z-index:2;
-  width:57%;
-  left:21.5%;
-  top:4%;
-  height:72%;
-  opacity:1;
+  width:59%;
+  left:20.5%;
+  top:0;
+  height:74%;
+  transform:translateY(170px);
+  opacity:.15;
   transform-origin:center bottom;
   transition:transform 1.25s cubic-bezier(.2,.8,.2,1), opacity .95s ease;
 }
-.paper-img{position:absolute;inset:0;width:100%;height:auto;filter:drop-shadow(0 24px 30px rgba(45,41,38,.18))}
+.paper-asset{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 24px 30px rgba(45,41,38,.18));
+}
 .paper-copy{
   position:absolute;
   inset:0;
@@ -77,30 +120,25 @@ p{color:var(--taupe)}a{color:inherit}
   text-align:center;
   padding:12.8% 9% 0;
   pointer-events:none;
+  opacity:0;
+  transition:opacity .8s ease .45s;
 }
 .paper-copy p{margin:0 0 5px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
-.paper-monogram{width:52%;height:115px;margin:14px auto 12px;background:var(--deep-rose)}
+.paper-monogram{width:52%;height:118px;margin:14px auto 12px;background:var(--deep-rose)}
 .paper-copy h1{font-size:clamp(21px,2.2vw,30px);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
 .paper-copy .rule{display:block;width:36px;height:1px;background:var(--dusty-rose);margin:15px auto 17px}
 .paper-copy h2{font-size:13.5px;letter-spacing:.2em;text-transform:uppercase}
 .paper-copy em{display:block;margin-top:6px;font-family:var(--display);font-size:13.5px;letter-spacing:.07em;line-height:1.45;color:var(--taupe)}
 
-.envelope-front{
+.env-front{
+  position:absolute;
   z-index:5;
   width:96%;
   left:2%;
   bottom:2%;
-  transition:transform .95s ease,opacity .85s ease;
+  display:block;
 }
-.envelope-flap{
-  z-index:4;
-  width:88%;
-  left:6%;
-  bottom:34%;
-  transform-origin:center top;
-  transition:transform 1s cubic-bezier(.2,.8,.2,1), opacity .7s ease;
-}
-.wax-seal{
+.open-seal{
   position:absolute;
   z-index:6;
   left:50%;
@@ -108,31 +146,42 @@ p{color:var(--taupe)}a{color:inherit}
   transform:translateX(-50%);
   width:86px;
   height:86px;
-  padding:0;border:0;background:transparent;cursor:pointer;
-  transition:transform .7s ease,opacity .65s ease;
+  padding:0;
+  border:0;
+  background:transparent;
+  cursor:pointer;
 }
-.wax-seal img{width:100%;height:100%;object-fit:contain;display:block}
+.open-seal img{width:100%;height:100%;object-fit:contain;display:block}
 
-/* CLOSED STATE: paper is tucked inside, flap visible */
-.invite:not(.invite-ready) .paper-wrap{transform:translateY(210px) scale(.98);opacity:.55}
-.invite:not(.invite-ready) .paper-copy{opacity:0}
-.invite:not(.invite-ready) .envelope-flap{transform:rotateX(0deg);opacity:1}
-.invite:not(.invite-ready) .wax-seal{transform:translateX(-50%) scale(.95);opacity:1}
+/* Opening sequence */
+.invite.invite-ready .closed-envelope{
+  opacity:0;
+  transform:translate(-50%,-44%) scale(.96);
+  pointer-events:none;
+}
+.invite.invite-ready .open-envelope{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.invite.invite-ready .invitation-paper{
+  transform:translateY(0);
+  opacity:1;
+}
+.invite.invite-ready .paper-copy{
+  opacity:1;
+}
 
-/* OPEN STATE: flap disappears, paper rises out of envelope */
-.invite.invite-ready .paper-wrap{transform:translateY(0) scale(1);opacity:1}
-.invite.invite-ready .paper-copy{opacity:1}
-.invite.invite-ready .envelope-flap{transform:rotateX(82deg) translateY(-10px);opacity:0}
-.invite.invite-ready .envelope-front{transform:translateY(0);opacity:1}
-.invite.invite-ready .wax-seal{transform:translateX(-50%) scale(1);opacity:1}
-
-/* Password */
+/* Password appears after envelope opens */
 .gate-form{
-  position:absolute;z-index:7;left:50%;bottom:3.2svh;transform:translate(-50%,14px);
+  position:absolute;z-index:9;left:50%;bottom:3.2svh;transform:translate(-50%,14px);
   width:min(380px,76vw);text-align:center;opacity:0;pointer-events:none;
   transition:opacity .7s ease,transform .7s ease;
 }
-.invite.invite-ready .gate-form{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.invite.invite-ready .gate-form{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+}
 .gate-form label{display:block;margin-bottom:10px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--deep-rose)}
 .gate-row{display:flex;border-bottom:1px solid var(--deep-rose)}
 .gate-row input{flex:1;min-width:0;border:0;background:transparent;padding:12px 4px;font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink);outline:none}
@@ -140,9 +189,10 @@ p{color:var(--taupe)}a{color:inherit}
 .gate-error{min-height:18px;margin-top:8px;font-size:12px;color:var(--deep-rose)}
 
 /* Correct password animation */
-.invite.opening .wax-seal{transform:translateX(-50%) scale(0) rotate(20deg);opacity:0}
-.invite.opening .envelope-front{transform:translateY(24px);opacity:.14}
-.invite.opening .paper-wrap{transform:translateY(-220px) scale(1.04);opacity:0}
+.invite.opening .open-seal{transform:translateX(-50%) scale(0) rotate(20deg);opacity:0;transition:.7s ease}
+.invite.opening .env-front{transform:translateY(24px);opacity:.14;transition:.85s ease}
+.invite.opening .invitation-paper{transform:translateY(-220px) scale(1.04);opacity:0}
+.invite.opening .gate-form{opacity:0;transform:translate(-50%,20px)}
 
 /* Nav */
 .site-nav{position:sticky;top:0;z-index:20;background:rgba(251,248,244,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -183,19 +233,20 @@ section{padding:var(--s6) var(--s3)}
 #rsvp-confirm{display:none}.site-footer{padding:var(--s3);display:flex;flex-wrap:wrap;gap:var(--s2);justify-content:center;background:var(--deep-rose);color:var(--ivory);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
 
 @media(max-height:780px){
-  .invite-stage{height:76svh;width:min(600px,84vw);margin-top:-6svh}
-  .gate-form{bottom:2svh}.wax-seal{width:72px;height:72px}
+  .invite-composition{height:76svh;width:min(610px,84vw);margin-top:-6svh}
+  .gate-form{bottom:2svh}.closed-seal,.open-seal{width:72px;height:72px}
 }
 @media(max-width:760px){
   .invite-bg{object-position:center top}
-  .invite-stage{width:94vw;height:min(650px,72svh);margin-top:-4svh}
-  .paper-wrap{width:60%;left:20%;top:2%}
-  .envelope-back{width:96%;left:2%;bottom:9%}
-  .envelope-front{width:99%;left:.5%;bottom:3%}
-  .envelope-flap{width:90%;left:5%;bottom:36%}
+  .invite-composition{width:94vw;height:min(650px,72svh);margin-top:-4svh}
+  .closed-envelope{width:84%}
+  .invitation-paper{width:61%;left:19.5%;top:2%}
+  .env-back{width:98%;left:1%;bottom:9%}
+  .env-front{width:99%;left:.5%;bottom:3%}
   .paper-copy{padding:12% 9% 0}
   .paper-copy p{font-size:6.4px;margin-bottom:3px}.paper-monogram{width:50%;height:82px;margin:10px auto}.paper-copy h1{font-size:18px}.paper-copy h2{font-size:10px}.paper-copy em{font-size:11px}
-  .wax-seal{width:64px;height:64px;bottom:21%}
+  .closed-seal,.open-seal{width:64px;height:64px}
+  .open-seal{bottom:21%}
   .gate-form{bottom:2svh;width:76vw}.gate-row input{font-size:16px}
   .nav-toggle{display:block}.nav-inner nav{display:none;position:absolute;top:100%;left:0;right:0;padding:var(--s3);background:var(--ivory);border-bottom:1px solid var(--line);flex-direction:column;gap:var(--s2)}.nav-inner nav.open{display:flex}
   .hero{min-height:78vh}.hero-panel{padding:var(--s4) var(--s3)}.hero-monogram{width:150px;height:118px}.countdown{gap:10px}.countdown div{min-width:48px}.countdown strong{font-size:28px}.countdown i{height:32px}

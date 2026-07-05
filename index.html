@@ -527,7 +527,28 @@
         width: 100%;
         flex: 0 0 100%;
         height: 320px;
-        object-fit:cover
+        object-fit: cover;
+        object-position:center center
+    }
+
+    .carousel-img-1 {
+        object-position:center center
+    }
+
+    .carousel-img-2 {
+        object-position:center center
+    }
+
+    .carousel-img-3 {
+        object-position:center center
+    }
+
+    .carousel-img-4 {
+        object-position:center center
+    }
+
+    .carousel-img-5 {
+        object-position:center center
     }
 
     .carousel-btn {
@@ -1051,11 +1072,11 @@
             </div>
             <div class="photo-carousel">
                 <div class="carousel-track" id="carousel-track">
-                    <img src="assets/carousel1.jpg" alt="">
-                    <img src="assets/carousel2.jpg" alt="">
-                    <img src="assets/carousel3.jpg" alt="">
-                    <img src="assets/carousel4.jpg" alt="">
-                    <img src="assets/carousel5.jpg" alt="">
+                    <img class="carousel-img carousel-img-1" src="assets/carousel1.jpg" alt="">
+                    <img class="carousel-img carousel-img-2" src="assets/carousel2.jpg" alt="">
+                    <img class="carousel-img carousel-img-3" src="assets/carousel3.jpg" alt="">
+                    <img class="carousel-img carousel-img-4" src="assets/carousel4.jpg" alt="">
+                    <img class="carousel-img carousel-img-5" src="assets/carousel5.jpg" alt="">
                 </div>
                 <button class="carousel-btn carousel-prev" id="carousel-prev">‹</button>
                 <button class="carousel-btn carousel-next" id="carousel-next">›</button>
@@ -1290,7 +1311,7 @@
     const SITE_PASSWORD = "ourday2027";
     const WEDDING_DATE = "2027-05-28T18:00:00";
     const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzZ6ORqfY32HHcGIlcjeomM4lDtsARNO4wSHAh6arYoJ7QWwTgSUxyqQNPB-MR5VAMQ/exec";
-    const OPENOPENWEATHER_API_KEY = "PASTE_YOUR_OPENOPENWEATHER_API_KEY_HERE";
+    const OPENOPENWEATHER_API_KEY = "a82b385718fdded8c8bed495de739aca";
     (function() {
         const invite = document.getElementById("invite"),
             main = document.getElementById("main-content"),
@@ -1372,61 +1393,84 @@
         e.querySelectorAll("a").forEach(t => t.addEventListener("click", () => e.classList.remove("open")))
     })();
     (function() {
-        const track = document.getElementById("carousel-track"),
-            prev = document.getElementById("carousel-prev"),
-            next = document.getElementById("carousel-next");
+        const track = document.getElementById("carousel-track");
+        const prev = document.getElementById("carousel-prev");
+        const next = document.getElementById("carousel-next");
         if (!track)
             return;
+
         let i = 0;
+        const total = track.querySelectorAll("img").length || 5;
+
         function go(n) {
-            i = (n + 5) % 5;
-            track.style.transform = `translateX(-${i * 100}%)`
+            i = (n + total) % total;
+            track.style.transform = `translateX(-${i * 100}%)`;
         }
+
         prev?.addEventListener("click", () => go(i - 1));
-        next?.addEventListener("click", () => go(i + 1))
+        next?.addEventListener("click", () => go(i + 1));
+
+        setInterval(() => go(i + 1), 3000);
     })();
     (function() {
-        const form = document.getElementById("rsvp-form"),
-            confirm = document.getElementById("rsvp-confirm");
+        const form = document.getElementById("rsvp-form");
+        const confirm = document.getElementById("rsvp-confirm");
         if (!form)
             return;
+
         form.addEventListener("submit", async e => {
             e.preventDefault();
+
+            const submitButton = form.querySelector("button[type='submit']");
             const data = Object.fromEntries(new FormData(form).entries());
             data.submittedAt = new Date().toISOString();
+
             try {
-                if (RSVP_ENDPOINT.includes("PASTE_"))
+                if (!RSVP_ENDPOINT || RSVP_ENDPOINT.includes("PASTE_"))
                     throw new Error("Missing RSVP endpoint");
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = "Sending...";
+                }
+
                 await fetch(RSVP_ENDPOINT, {
                     method: "POST",
                     mode: "no-cors",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
+                    body: new URLSearchParams(data)
                 });
+
                 form.style.display = "none";
-                confirm.style.display = "block"
+                confirm.style.display = "block";
             } catch (err) {
-                alert("RSVP is not connected yet. Add the Google Apps Script Web App URL in the code.")
+                console.warn("RSVP failed:", err);
+                alert("RSVP could not be submitted. Please try again or contact Jeremy & Kimia.");
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = "Send RSVP";
+                }
             }
-        })
+        });
     })();
     (async function() {
         const el = document.getElementById("weather-pill");
-        if (!el || OPENOPENWEATHER_API_KEY.includes("a82b385718fdded8c8bed495de739aca"))
+        if (!el || !OPENOPENWEATHER_API_KEY)
             return;
 
         try {
-            const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Naoussa,GR&units=metric&appid=${OPENOPENWEATHER_API_KEY}`);
+            // Naoussa, Paros approximate coordinates. More reliable than city search.
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=37.1230&lon=25.2400&units=metric&appid=${OPENOPENWEATHER_API_KEY}`;
+            const res = await fetch(url);
             const data = await res.json();
 
-            if (data && data.main && data.weather && data.weather[0]) {
+            if (data && data.cod === 200 && data.main && data.weather && data.weather[0]) {
                 el.textContent = `Paros ${Math.round(data.main.temp)}°C · ${data.weather[0].main}`;
             } else {
+                console.warn("OpenWeather response:", data);
                 el.textContent = "Paros weather";
             }
         } catch (e) {
+            console.warn("OpenWeather failed:", e);
             el.textContent = "Paros weather";
         }
     })();

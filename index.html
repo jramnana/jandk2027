@@ -17,31 +17,38 @@
     <img class="invite-bg" src="assets/background.webp" alt="">
   </picture>
 
-  <div class="invite-stage" id="invite-stage">
-    <img class="layer envelope-back" src="assets/envelope-back.png" alt="">
-
-    <div class="paper-wrap">
-      <img class="paper-img" src="assets/paper.png" alt="">
-      <div class="paper-copy">
-        <p>Together with their families</p>
-        <p>request the pleasure of your company</p>
-        <p>at the wedding of</p>
-
-        <span class="mono paper-monogram" aria-label="Jeremy and Kimia monogram"></span>
-
-        <h1>Jeremy & Kimia</h1>
-        <span class="rule"></span>
-        <h2>May 28, 2027</h2>
-        <em>Naoussa, Paros<br>Greece</em>
-      </div>
+  <div class="invite-composition" id="invite-composition">
+    <div class="closed-envelope" id="closed-envelope">
+      <img class="closed-front" src="assets/envelope-front.png" alt="">
+      <button class="closed-seal" id="closed-seal" type="button" aria-label="Open invitation">
+        <img src="assets/wax-seal.png" alt="">
+      </button>
     </div>
 
-    <img class="layer envelope-flap" src="assets/envelope-flap.png" alt="">
-    <img class="layer envelope-front" src="assets/envelope-front.png" alt="">
+    <div class="open-envelope" id="open-envelope">
+      <img class="env-back" src="assets/envelope-back.png" alt="">
 
-    <button class="wax-seal" id="wax-button" type="button" aria-label="Focus password field">
-      <img src="assets/wax-seal.png" alt="">
-    </button>
+      <div class="invitation-paper">
+        <img class="paper-asset" src="assets/paper.png" alt="">
+        <div class="paper-copy">
+          <p>Together with their families</p>
+          <p>request the pleasure of your company</p>
+          <p>at the wedding of</p>
+
+          <span class="mono paper-monogram" aria-label="Jeremy and Kimia monogram"></span>
+
+          <h1>Jeremy & Kimia</h1>
+          <span class="rule"></span>
+          <h2>May 28, 2027</h2>
+          <em>Naoussa, Paros<br>Greece</em>
+        </div>
+      </div>
+
+      <img class="env-front" src="assets/envelope-back.png" alt="">
+      <button class="open-seal" id="wax-button" type="button" aria-label="Focus password field">
+        <img src="assets/wax-seal.png" alt="">
+      </button>
+    </div>
   </div>
 
   <form id="gate-form" class="gate-form" aria-hidden="true">
@@ -102,7 +109,6 @@
       <p class="eyebrow">The Weekend</p>
       <h2>Three days in Paros</h2>
     </div>
-
     <div class="timeline">
       <article>
         <span>Thursday · May 27</span>
@@ -110,14 +116,12 @@
         <p>Stilvi Restaurant<br>6:00 PM – 10:00 PM</p>
         <a href="https://www.google.com/maps/search/?api=1&query=Stilvi+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
       </article>
-
       <article>
         <span>Friday · May 28</span>
         <h3>Wedding Ceremony & Reception</h3>
         <p>Monastiri Beach Bar & Restaurant Amphitheater<br>6:00 PM ceremony, followed by cocktail hour, dinner, and reception until 2:00 AM.</p>
         <a href="https://www.google.com/maps/search/?api=1&query=Monastiri+Beach+Bar+Restaurant+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
       </article>
-
       <article>
         <span>Saturday · May 29</span>
         <h3>Pool Party Day</h3>

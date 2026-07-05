@@ -7,7 +7,6 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
   const form=document.getElementById('gate-form');
   const input=document.getElementById('gate-input');
   const error=document.getElementById('gate-error');
-  document.body.classList.add('locked');
 
   if(sessionStorage.getItem('wedding-unlocked')==='true'){
     inviteEl.classList.add('opened');
@@ -20,13 +19,14 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
     if(input.value.trim().toLowerCase()===SITE_PASSWORD.toLowerCase()){
       sessionStorage.setItem('wedding-unlocked','true');
       error.textContent='';
-      inviteEl.classList.add('opened');
+      inviteEl.classList.add('opening');
       setTimeout(()=>{
+        inviteEl.classList.add('opened');
         mainContent.classList.add('revealed');
         document.body.classList.remove('locked');
         document.getElementById('hero').scrollIntoView({behavior:'smooth'});
-      },450);
-    } else {
+      },850);
+    }else{
       error.textContent="That's not quite it — try again.";
     }
   });
@@ -39,17 +39,12 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
   function tick(){
     const diff=target-Date.now();
     if(diff<=0){els.d.textContent=els.h.textContent=els.m.textContent=els.s.textContent='0';return;}
-    const days=Math.floor(diff/86400000);
-    const hours=Math.floor((diff%86400000)/3600000);
-    const mins=Math.floor((diff%3600000)/60000);
-    const secs=Math.floor((diff%60000)/1000);
-    els.d.textContent=days;
-    els.h.textContent=String(hours).padStart(2,'0');
-    els.m.textContent=String(mins).padStart(2,'0');
-    els.s.textContent=String(secs).padStart(2,'0');
+    els.d.textContent=Math.floor(diff/86400000);
+    els.h.textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    els.m.textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    els.s.textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
   }
-  tick();
-  setInterval(tick,1000);
+  tick();setInterval(tick,1000);
 })();
 
 (function nav(){

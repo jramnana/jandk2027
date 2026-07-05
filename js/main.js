@@ -24,7 +24,7 @@ const WEDDING_DATE = "2027-05-28T18:00:00";
     return;
   }
 
-  // Page loads closed. Then the invite opens and reveals the password.
+  // Closed envelope first, then opens into the invitation and reveals password.
   window.setTimeout(()=>{
     inviteEl.classList.add('invite-ready');
     form.setAttribute('aria-hidden','false');

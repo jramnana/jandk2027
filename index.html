@@ -1412,17 +1412,23 @@
             }
         })
     })();
-    (async function() {
-        const el = document.getElementById("weather-pill");
-        if (!el || WEATHER_API_KEY.includes("PASTE_"))
-            return;
-        try {
-            const r = await fetch(`https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=Paros Greece&aqi=no`);
-            const d = await r.json();
-            el.textContent = `Paros ${Math.round(d.current.temp_c)}°C · ${d.current.condition.text}`
-        } catch (e) {
-            el.textContent = "Paros weather"
-        }
+(async function () {
+    const el = document.getElementById("weather-pill");
+    if (!el || !OPENWEATHER_API_KEY) return;
+
+    try {
+        const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=Naoussa,GR&units=metric&appid=${a82b385718fdded8c8bed495de739aca`
+        );
+
+        const data = await res.json();
+
+        el.textContent =
+            `${Math.round(data.main.temp)}°C · ${data.weather[0].main}`;
+    } catch (e) {
+        el.textContent = "Paros Weather";
+    }
+})();
     })();
     </script>
 </body>

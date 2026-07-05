@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
     <title>Jeremy & Kimia — A Wedding Weekend in Paros</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -518,6 +520,17 @@
         border-bottom: 1px solid currentColor
     }
 
+    .map-link {
+        display: inline-block;
+        margin: 0 24px 24px;
+        font-size: 11px;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--rose-deep);
+        border-bottom: 1px solid currentColor
+    }
+
     .split {
         display: grid;
         grid-template-columns: .9fr 1.1fr;
@@ -871,8 +884,8 @@
                 <button class="nav-toggle" id="nav-toggle" aria-label="Menu">&#9776;</button>
                 <nav id="nav-menu">
                     <a href="#weekend">Weekend</a>
-                    <a href="#stay">Stay</a>
                     <a href="#travel">Travel</a>
+                    <a href="#stay">Stay</a>
                     <a href="#explore">Paros Guide</a>
                     <a href="#rsvp">RSVP</a>
                 </nav>
@@ -956,28 +969,8 @@
                             <small>Saturday · May 29</small>
                         </div>
                         <h3>Pool Party Day</h3>
-                        <p>Pool party at the hotel. A relaxed day to swim, recover, and enjoy the island together.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-        <section id="stay" class="soft">
-            <div class="section-inner split">
-                <div>
-                    <p class="eyebrow">Stay</p>
-                    <h2>Naoussa will be home base.</h2>
-                    <p>We’ve reserved special pricing with Adonis Hotel and its sister hotel next door. Breakfast is included, and staying here will keep guests close to the weekend plans and transportation.</p>
-                </div>
-                <div class="cards image-cards">
-                    <article>
-                        <img src="assets/adonis.jpg" alt="Adonis Hotel">
-                        <h3>Adonis Hotel</h3>
-                        <p>Reserved room block with special pricing. Breakfast included.</p>
-                    </article>
-                    <article>
-                        <img src="assets/la-maltese.jpg" alt="La Maltese">
-                        <h3>La Maltese Boutique</h3>
-                        <p>Sister hotel next door with special pricing. Breakfast included.</p>
+                        <p>Pool party at Adonis Hotel. A relaxed day to swim, recover, and enjoy the island together.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Adonis+Hotel+Naoussa+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
                     </article>
                 </div>
             </div>
@@ -1009,6 +1002,30 @@
                 <p class="weather-note">Weather note: late May in Paros is typically warm during the day and cooler in the evening. We’ll add a live forecast closer to the wedding.</p>
             </div>
         </section>
+        <section id="stay" class="soft">
+            <div class="section-inner split">
+                <div>
+                    <p class="eyebrow">Stay</p>
+                    <h2>Naoussa will be home base.</h2>
+                    <p>We’ve reserved special pricing with Adonis Hotel and its sister hotel next door. Breakfast is included, and staying here will keep guests close to the weekend plans and transportation.</p>
+                </div>
+                <div class="cards image-cards">
+                    <article>
+                        <img src="assets/adonis.jpg" alt="Adonis Hotel">
+                        <h3>Adonis Hotel</h3>
+                        <p>Reserved room block with special pricing. Breakfast included.</p>
+                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Adonis+Hotel+Naoussa+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
+                    </article>
+                    <article>
+                        <img src="assets/la-maltese.jpg" alt="La Maltese">
+                        <h3>La Maltese Boutique</h3>
+                        <p>Sister hotel next door with special pricing. Breakfast included.</p>
+                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=La+Maltese+Boutique+Hotel+Naoussa+Paros" target="_blank" rel="noopener">Open in Google Maps →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <section id="explore" class="soft">
             <div class="section-inner">
                 <div class="section-head">

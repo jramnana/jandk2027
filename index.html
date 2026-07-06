@@ -1298,7 +1298,7 @@
     }
 }
 
-/* FINAL STICKY RSVP OVERRIDE */
+/* FINAL RSVP STICKY BAR */
 .sticky-rsvp {
     position: fixed !important;
     left: 0 !important;
@@ -1316,10 +1316,15 @@
     border-top: 1px solid rgba(139, 62, 74, .16) !important;
     box-shadow: 0 -10px 30px rgba(45, 41, 38, .08) !important;
     text-decoration: none !important;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity .35s ease, transform .35s ease;
 }
 
 body.site-unlocked .sticky-rsvp.is-visible {
     display: flex !important;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .sticky-rsvp.hidden {
@@ -1357,114 +1362,39 @@ body.site-unlocked .sticky-rsvp.is-visible {
     }
 }
 
-/* FINAL MOBILE INVITE CENTERING OVERRIDE */
-@media (max-width: 760px) {
-    .invite {
-        display: block !important;
-    }
-
-    .invite-art {
-        position: fixed !important;
-        left: 0 !important;
-        top: 0 !important;
-        width: 100vw !important;
-        height: 100svh !important;
-        margin: 0 !important;
-        transform: none !important;
-        overflow: visible !important;
-        display: block !important;
-    }
-
-    .scene-img {
-        position: fixed !important;
-        left: 50vw !important;
-        top: 43svh !important;
-        right: auto !important;
-        margin: 0 !important;
-        transform: translate3d(-50%, -50%, 0) !important;
-        transform-origin: center center !important;
-    }
-
-    .scene-closed {
-        width: min(84vw, 380px) !important;
-    }
-
-    .scene-open {
-        width: min(84vw, 390px) !important;
-    }
-
-    .invite.invite-ready .scene-closed {
-        transform: translate3d(-50%, -50%, 0) scale(.74) !important;
-    }
-
-    .invite.invite-ready .scene-open {
-        transform: translate3d(-50%, -50%, 0) scale(1) !important;
-    }
-
-    .gate-form {
-        position: fixed !important;
-        left: 50vw !important;
-        bottom: 3svh !important;
-        transform: translateX(-50%) !important;
-    }
-}
-
-/* FINAL STICKY RSVP GUARANTEE */
-.sticky-rsvp {
+/* FINAL MUSIC BUTTON */
+.music-toggle {
     position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    z-index: 9999 !important;
-    display: none !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-height: 86px !important;
-    padding: 18px 24px !important;
-    background: rgba(251, 248, 244, .68) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border-top: 1px solid rgba(139, 62, 74, .16) !important;
-    box-shadow: 0 -10px 30px rgba(45, 41, 38, .08) !important;
-    text-decoration: none !important;
+    left: 24px !important;
+    bottom: 104px !important;
+    z-index: 10000 !important;
+    display: inline-grid !important;
+    place-items: center !important;
+    width: 46px !important;
+    height: 46px !important;
+    border: 1px solid rgba(139, 62, 74, .28) !important;
+    border-radius: 50% !important;
+    background: rgba(251, 248, 244, .76) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    color: var(--rose-deep) !important;
+    font-size: 17px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    box-shadow: 0 10px 24px rgba(45, 41, 38, .12) !important;
 }
 
-body.site-unlocked .sticky-rsvp.is-visible {
-    display: flex !important
-}
-
-.sticky-rsvp.hidden {
-    display: none !important
-}
-
-.sticky-rsvp::after {
-    content: "RSVP NOW";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 164px;
-    height: 54px;
-    padding: 0 30px;
-    background: var(--rose-deep);
-    color: var(--ivory);
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-}
-
-.sticky-rsvp span {
-    display: none
+.music-toggle.playing {
+    background: var(--rose-deep) !important;
+    color: var(--ivory) !important
 }
 
 @media (max-width: 760px) {
-    .sticky-rsvp {
-        min-height: 76px !important;
-        padding: 14px 18px !important
-    }
-
-    .sticky-rsvp::after {
-        height: 48px;
-        min-width: 144px
+    .music-toggle {
+        left: 16px !important;
+        bottom: 92px !important;
+        width: 44px !important;
+        height: 44px !important
     }
 }
 </style>
@@ -2149,6 +2079,75 @@ body.site-unlocked .sticky-rsvp.is-visible {
         updateStickyRsvp();
 
         window.updateStickyRsvp = updateStickyRsvp;
+    })();
+
+
+    (function() {
+        const sticky = document.getElementById("sticky-rsvp");
+        const heroButton = document.querySelector(".hero-rsvp");
+        const rsvpSection = document.getElementById("rsvp");
+        const footer = document.querySelector(".site-footer");
+
+        if (!sticky || !heroButton)
+            return;
+
+        const deadline = new Date("2026-10-15T23:59:59").getTime();
+        let heroButtonVisible = true;
+        let rsvpVisible = false;
+        let footerVisible = false;
+
+        function updateStickyRsvp() {
+            const unlocked = document.body.classList.contains("site-unlocked");
+            const expired = Date.now() > deadline;
+            const shouldShow = unlocked && !expired && !heroButtonVisible && !rsvpVisible && !footerVisible;
+
+            sticky.classList.toggle("is-visible", shouldShow);
+            sticky.classList.toggle("hidden", !shouldShow);
+        }
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                heroButtonVisible = entry.isIntersecting;
+            });
+            updateStickyRsvp();
+        }, {
+            threshold: 0
+        });
+
+        heroObserver.observe(heroButton);
+
+        if (rsvpSection) {
+            const rsvpObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    rsvpVisible = entry.isIntersecting;
+                });
+                updateStickyRsvp();
+            }, {
+                threshold: 0.12
+            });
+            rsvpObserver.observe(rsvpSection);
+        }
+
+        if (footer) {
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    footerVisible = entry.isIntersecting;
+                });
+                updateStickyRsvp();
+            }, {
+                threshold: 0
+            });
+            footerObserver.observe(footer);
+        }
+
+        window.addEventListener("scroll", updateStickyRsvp, {
+            passive: true
+        });
+        window.addEventListener("resize", updateStickyRsvp);
+        setInterval(updateStickyRsvp, 1000);
+
+        window.updateStickyRsvp = updateStickyRsvp;
+        updateStickyRsvp();
     })();
     </script>
 </body>

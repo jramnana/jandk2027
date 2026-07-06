@@ -245,7 +245,7 @@
         text-align: center;
         opacity: 0;
         pointer-events: none;
-        transition:opacity .7s ease 5.15s, transform .7s ease 5.15s
+        transition:opacity .7s ease 3.15s, transform .7s ease 3.15s
     }
 
     .invite.invite-ready .gate-form {
@@ -362,11 +362,11 @@
     }
 
     .invite.invite-ready .scene-open {
-        transition-delay: 4s
+        transition-delay: 2s
     }
 
     .invite.invite-ready .gate-form {
-        transition-delay: 5.15s
+        transition-delay: 3.15s
     }
 
     .invite.opening .scene-open {
@@ -930,6 +930,10 @@
         color: var(--ivory)
     }
 
+    .music-toggle.error {
+        opacity: .55
+    }
+
     @media (max-width: 760px) {
         .music-toggle {
             left: 14px;
@@ -938,64 +942,58 @@
             height: 44px
         }
     }
+}
 
+.sticky-rsvp {
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:110;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    min-height:86px;
+    padding:18px 24px;
+    background:rgba(251, 248, 244, .64);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-top:1px solid rgba(139, 62, 74, .16);
+    box-shadow:0 -10px 30px rgba(45, 41, 38, .08);
+    text-decoration:none;
+}
+
+body.site-unlocked .sticky-rsvp.is-visible {
+    display:flex
+}
+
+.sticky-rsvp.hidden {
+    display:none !important
+}
+
+.sticky-rsvp::after {
+    content:"RSVP NOW";
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:164px;
+    height:54px;
+    padding:0 30px;
+    background:var(--rose-deep);
+    color:var(--ivory);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+
+.sticky-rsvp span {
+    display:none
+}
+
+@media (max-width: 760px) {
     .sticky-rsvp {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 110;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        min-height: 86px;
-        padding: 18px 24px;
-        background: rgba(251, 248, 244, .62);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-top: 1px solid rgba(139, 62, 74, .16);
-        box-shadow: 0 -10px 30px rgba(45, 41, 38, .08);
-        color: var(--ivory);
-        text-decoration: none;
-    }
-
-    body.site-unlocked .sticky-rsvp {
-        display: flex
-    }
-
-    body.site-unlocked .sticky-rsvp.hidden {
-        display: none
-    }
-
-    .sticky-rsvp::after {
-        content: "RSVP NOW";
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 158px;
-        height: 54px;
-        padding: 0 28px;
-        background: var(--rose-deep);
-        color: var(--ivory);
-        font-size: 11px;
-        letter-spacing: .18em;
-        text-transform: uppercase;
-    }
-
-    .sticky-rsvp span {
-        display: none
-    }
-
-    @media (max-width: 760px) {
-        .sticky-rsvp {
-            min-height: 76px;
-            padding: 14px 18px
-        }
-
-        .sticky-rsvp::after {
-            height: 48px;
-            min-width: 144px
-        }
+        min-height: 76px;
+        padding: 14px 18px
     }
 
     .sticky-rsvp::after {
@@ -1004,13 +1002,46 @@
     }
 }
 
+.sticky-rsvp::after {
+    height:48px;
+    min-width:144px
+}
+}
+
+.sticky-rsvp::after {
+    height: 48px;
+    min-width: 144px
+}
+}
+
 .music-toggle {
-    left:14px;
-    bottom:14px;
-    width:44px;
-    height:44px
+    left: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px
 }
 }
+}
+
+.map-embed {
+    margin: 36px auto 0;
+    max-width: 1040px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: rgba(255, 255, 255, .45);
+}
+
+.map-embed iframe {
+    display: block;
+    width: 100%;
+    height: 520px;
+    border: 0;
+}
+
+@media (max-width: 760px) {
+    .map-embed iframe {
+        height: 420px
+    }
 }
 
 .site-footer {
@@ -1075,7 +1106,42 @@
     border-bottom: 1px solid currentColor;
 }
 
+.weekend-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekend-card h3 {
+    font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.04;
+}
+
+.weekend-card p {
+    flex: 1;
+}
+
+.weekend-card a {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
 @media (min-width: 761px) {
+    .carousel-track img {
+        height: 520px;
+        object-position: center 28%
+    }
+
+    .weekend-grid {
+        grid-template-columns: repeat(4, 1fr)
+    }
+}
+
+@media (min-width: 761px) {
+    .carousel-track img {
+        height: 520px;
+        object-position: center 28%
+    }
+
     .travel-guide-card {
         grid-template-columns: 42% 58%;
         align-items: stretch
@@ -1087,7 +1153,42 @@
     }
 }
 
+.weekend-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekend-card h3 {
+    font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.04;
+}
+
+.weekend-card p {
+    flex: 1;
+}
+
+.weekend-card a {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
 @media (min-width: 761px) {
+    .carousel-track img {
+        height: 520px;
+        object-position: center 28%
+    }
+
+    .weekend-grid {
+        grid-template-columns: repeat(4, 1fr)
+    }
+}
+
+@media (min-width: 761px) {
+    .carousel-track img {
+        height: 520px;
+        object-position: center 28%
+    }
+
     .invite-bg {
         object-position:center
     }
@@ -1385,7 +1486,7 @@
                             <small>Sunday · May 30</small>
                         </div>
                         <h3>Check-Out</h3>
-                        <p>Check out from the hotel and say our goodbyes after a beautiful weekend in Paros.</p>
+                        <p>Check-out is at 11:00 AM. Say our goodbyes after a beautiful weekend in Paros.</p>
                     </article>
                 </div>
             </div>
@@ -1462,6 +1563,9 @@
                     <p class="eyebrow">Paros Guide</p>
                     <h2>Our favourite places on the island.</h2>
                     <p>Restaurants, beaches, coffee, cocktails, and island recommendations will be added here.</p>
+                    <div class="map-embed">
+                        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gGaC6En2ZBJzMOpeOIRotkUi_WinPiY&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1565,7 +1669,14 @@
         </footer>
     </div>
     <script>
-    const SITE_PASSWORD = "ourday2027";
+
+    async function sha256Text(text) {
+        const data = new TextEncoder().encode(text.trim().toLowerCase());
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    const SITE_PASSWORD_HASH = "9d63d5a3f9e7d0b01f0d84d81e361726c5c9811475325fb63b6a93c2e8b44535";
     const WEDDING_DATE = "2027-05-28T18:00:00";
     const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzZ6ORqfY32HHcGIlcjeomM4lDtsARNO4wSHAh6arYoJ7QWwTgSUxyqQNPB-MR5VAMQ/exec";
     const OPENOPENOPENWEATHER_API_KEY = "a82b385718fdded8c8bed495de739aca";
@@ -1604,18 +1715,18 @@
         .map(img => img.decode ? img.decode().catch(() => {}) : Promise.resolve());
 
         Promise.all(decodes).then(() => {
-            setTimeout(beginInviteAnimation, 1000);
+            setTimeout(beginInviteAnimation, 3000);
         });
 
         // Fallback if decode hangs.
         setTimeout(() => {
             if (!invite.classList.contains("invite-ready"))
                 beginInviteAnimation();
-        }, 2400);
+        }, 4200);
 
-        form.addEventListener("submit", e => {
+        form.addEventListener("submit", async e => {
             e.preventDefault();
-            if (input.value.trim().toLowerCase() === SITE_PASSWORD.toLowerCase()) {
+            if (await sha256Text(input.value) === SITE_PASSWORD_HASH) {
                 sessionStorage.setItem("wedding-unlocked", "true");
                 error.textContent = "";
                 if (window.startWeddingMusic)
@@ -1787,6 +1898,7 @@
 
 
 
+
     (function() {
         const audio = document.getElementById("bg-music");
         const btn = document.getElementById("music-toggle");
@@ -1795,7 +1907,7 @@
 
         audio.volume = 0.12;
         let userPaused = false;
-        let hasUserInteracted = false;
+        let unlocked = false;
 
         function render() {
             const playing = !audio.paused && !audio.ended;
@@ -1809,20 +1921,25 @@
                 return;
             try {
                 await audio.play();
-            } catch (e) {}
+                unlocked = true;
+            } catch (e) {
+
+            }
             render();
         }
 
         btn.addEventListener("click", async function(e) {
             e.preventDefault();
             e.stopPropagation();
-            hasUserInteracted = true;
 
             if (audio.paused) {
                 userPaused = false;
                 try {
                     await audio.play();
-                } catch (err) {}
+                    unlocked = true;
+                } catch (err) {
+                    btn.classList.add("error");
+                }
             } else {
                 userPaused = true;
                 audio.pause();
@@ -1832,18 +1949,20 @@
 
         audio.addEventListener("play", render);
         audio.addEventListener("pause", render);
+        audio.addEventListener("error", () => {
+            btn.classList.add("error");
+            console.warn("Music file not found or cannot load: assets/background-music.mp3");
+        });
 
-        // Try autoplay. Most browsers block this, so this is best-effort only.
-        window.addEventListener("load", () => setTimeout(playMusic, 600));
+        // Best effort autoplay. If blocked, first normal click/tap can unlock it.
+        window.addEventListener("load", () => setTimeout(playMusic, 700));
 
-        // Unlock audio on first interaction, but never when user clicked the pause button.
         ["pointerdown", "touchstart", "keydown"].forEach(evt => {
             document.addEventListener(evt, function(e) {
-                if (hasUserInteracted || userPaused)
+                if (unlocked || userPaused)
                     return;
                 if (e.target && e.target.closest && e.target.closest("#music-toggle"))
                     return;
-                hasUserInteracted = true;
                 playMusic();
             }, {
                 once: true
@@ -1852,10 +1971,10 @@
 
         window.startWeddingMusic = function() {
             userPaused = false;
-            hasUserInteracted = true;
             playMusic();
         };
     })();
+
 
 
 
@@ -1878,6 +1997,34 @@
 
         updateStickyRsvp();
         setInterval(updateStickyRsvp, 3600000);
+    })();
+
+
+    (function() {
+        const sticky = document.getElementById("sticky-rsvp");
+        const source = document.querySelector(".hero-rsvp");
+        const rsvp = document.getElementById("rsvp");
+        if (!sticky || !source)
+            return;
+
+        const deadline = new Date("2026-10-15T23:59:59").getTime();
+
+        function updateStickyRsvp() {
+            const expired = Date.now() > deadline;
+            const unlocked = document.body.classList.contains("site-unlocked");
+            const sourcePassed = source.getBoundingClientRect().bottom < 0;
+            const rsvpVisible = rsvp && rsvp.getBoundingClientRect().top < window.innerHeight * .7;
+
+            sticky.classList.toggle("hidden", expired || !unlocked || !sourcePassed || rsvpVisible);
+            sticky.classList.toggle("is-visible", !expired && unlocked && sourcePassed && !rsvpVisible);
+        }
+
+        window.addEventListener("scroll", updateStickyRsvp, {
+            passive: true
+        });
+        window.addEventListener("resize", updateStickyRsvp);
+        setInterval(updateStickyRsvp, 1000);
+        updateStickyRsvp();
     })();
     </script>
 </body>

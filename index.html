@@ -1298,43 +1298,32 @@
     }
 }
 
-/* FINAL RSVP STICKY - viewport fixed */
+/* FINAL STICKY RSVP OVERRIDE */
 .sticky-rsvp {
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    z-index: 99999 !important;
-    display: flex !important;
+    z-index: 9999 !important;
+    display: none !important;
     align-items: center !important;
     justify-content: center !important;
     min-height: 86px !important;
     padding: 18px 24px !important;
-    background: rgba(251, 248, 244, .72) !important;
+    background: rgba(251, 248, 244, .68) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     border-top: 1px solid rgba(139, 62, 74, .16) !important;
     box-shadow: 0 -10px 30px rgba(45, 41, 38, .08) !important;
     text-decoration: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: translateY(100%) !important;
-    transition: opacity .35s ease, transform .35s ease, visibility .35s ease !important;
 }
 
-body.site-unlocked.sticky-rsvp-active .sticky-rsvp {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: translateY(0) !important;
+body.site-unlocked .sticky-rsvp.is-visible {
+    display: flex !important;
 }
 
-body.sticky-rsvp-suppressed .sticky-rsvp {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: translateY(100%) !important;
+.sticky-rsvp.hidden {
+    display: none !important;
 }
 
 .sticky-rsvp::after {
@@ -1368,39 +1357,114 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
     }
 }
 
-/* Music button - side sticky */
-.music-toggle {
-    position: fixed !important;
-    left: 24px !important;
-    bottom: 104px !important;
-    z-index: 100000 !important;
-    display: inline-grid !important;
-    place-items: center !important;
-    width: 46px !important;
-    height: 46px !important;
-    border: 1px solid rgba(139, 62, 74, .28) !important;
-    border-radius: 50% !important;
-    background: rgba(251, 248, 244, .76) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    color: var(--rose-deep) !important;
-    font-size: 17px !important;
-    line-height: 1 !important;
-    cursor: pointer !important;
-    box-shadow: 0 10px 24px rgba(45, 41, 38, .12) !important;
+/* FINAL MOBILE INVITE CENTERING OVERRIDE */
+@media (max-width: 760px) {
+    .invite {
+        display: block !important;
+    }
+
+    .invite-art {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100svh !important;
+        margin: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    .scene-img {
+        position: fixed !important;
+        left: 50vw !important;
+        top: 43svh !important;
+        right: auto !important;
+        margin: 0 !important;
+        transform: translate3d(-50%, -50%, 0) !important;
+        transform-origin: center center !important;
+    }
+
+    .scene-closed {
+        width: min(84vw, 380px) !important;
+    }
+
+    .scene-open {
+        width: min(84vw, 390px) !important;
+    }
+
+    .invite.invite-ready .scene-closed {
+        transform: translate3d(-50%, -50%, 0) scale(.74) !important;
+    }
+
+    .invite.invite-ready .scene-open {
+        transform: translate3d(-50%, -50%, 0) scale(1) !important;
+    }
+
+    .gate-form {
+        position: fixed !important;
+        left: 50vw !important;
+        bottom: 3svh !important;
+        transform: translateX(-50%) !important;
+    }
 }
 
-.music-toggle.playing {
-    background: var(--rose-deep) !important;
-    color: var(--ivory) !important
+/* FINAL STICKY RSVP GUARANTEE */
+.sticky-rsvp {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 86px !important;
+    padding: 18px 24px !important;
+    background: rgba(251, 248, 244, .68) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(139, 62, 74, .16) !important;
+    box-shadow: 0 -10px 30px rgba(45, 41, 38, .08) !important;
+    text-decoration: none !important;
+}
+
+body.site-unlocked .sticky-rsvp.is-visible {
+    display: flex !important
+}
+
+.sticky-rsvp.hidden {
+    display: none !important
+}
+
+.sticky-rsvp::after {
+    content: "RSVP NOW";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 164px;
+    height: 54px;
+    padding: 0 30px;
+    background: var(--rose-deep);
+    color: var(--ivory);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.sticky-rsvp span {
+    display: none
 }
 
 @media (max-width: 760px) {
-    .music-toggle {
-        left: 16px !important;
-        bottom: 92px !important;
-        width: 44px !important;
-        height: 44px !important
+    .sticky-rsvp {
+        min-height: 76px !important;
+        padding: 14px 18px !important
+    }
+
+    .sticky-rsvp::after {
+        height: 48px;
+        min-width: 144px
     }
 }
 </style>
@@ -1428,10 +1492,10 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
     <audio id="bg-music" src="assets/background-music.mp3" loop preload="none"></audio>
     <button class="music-toggle sticky-music" id="music-toggle" type="button" aria-label="Play background music">♪</button>
 
-    <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">
-        <span>RSVP</span>
-    </a>
     <div id="main-content">
+        <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">
+            <span>RSVP</span>
+        </a>
         <header class="site-nav">
             <div class="nav-inner">
                 <a class="brand" href="#hero">
@@ -1478,7 +1542,6 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
                     </div>
                 </div>
                 <a class="hero-rsvp" href="#rsvp">RSVP Now</a>
-                <div id="rsvp-sticky-trigger" aria-hidden="true"></div>
                 <p class="hero-rsvp-note">Please RSVP by Oct 15th</p>
             </div>
         </section>
@@ -1661,6 +1724,10 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
                     <div class="faq-item">
                         <h3>What should I wear?</h3>
                         <p>Formal wedding attire. More detailed guidance will follow closer to the date.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>May I bring my children?</h3>
+                        <p>We've chosen to make our wedding an adults-only celebration. We hope this gives everyone the chance to relax, celebrate, and enjoy a weekend away. Thank you so much for understanding.</p>
                     </div>
                 </div>
             </div>
@@ -1983,6 +2050,9 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
 
 
 
+
+
+
     (function() {
         const audio = document.getElementById("bg-music");
         const btn = document.getElementById("music-toggle");
@@ -1999,12 +2069,14 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
             btn.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
         }
 
-        async function startMusic() {
+        async function playMusic() {
             if (userPaused)
                 return;
             try {
                 await audio.play();
-            } catch (e) {}
+            } catch (e) {
+
+            }
             render();
         }
 
@@ -2023,19 +2095,20 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
                 userPaused = true;
                 audio.pause();
             }
+
             render();
-        });
+        }, true);
 
         audio.addEventListener("play", render);
         audio.addEventListener("pause", render);
         audio.addEventListener("error", function() {
             btn.classList.add("error");
-            console.warn("Music file did not load: assets/background-music.mp3");
+            console.warn("Music file could not load. Confirm assets/background-music.mp3 exists and returns 200.");
         });
 
         window.startWeddingMusic = function() {
             userPaused = false;
-            startMusic();
+            playMusic();
         };
 
         render();
@@ -2043,44 +2116,39 @@ body.sticky-rsvp-suppressed .sticky-rsvp {
 
 
     (function() {
-        const trigger = document.getElementById("rsvp-sticky-trigger");
+        const sticky = document.getElementById("sticky-rsvp");
+        const heroButton = document.querySelector(".hero-rsvp");
         const rsvpSection = document.getElementById("rsvp");
+        if (!sticky || !heroButton)
+            return;
+
         const deadline = new Date("2026-10-15T23:59:59").getTime();
 
-        function isUnlocked() {
-            return document.body.classList.contains("site-unlocked") || sessionStorage.getItem("wedding-unlocked") === "true";
-        }
-
         function updateStickyRsvp() {
+            const unlocked = document.body.classList.contains("site-unlocked");
             const expired = Date.now() > deadline;
-            const unlocked = isUnlocked();
 
-            let active = false;
+            const heroButtonPageBottom = heroButton.getBoundingClientRect().bottom + window.scrollY;
+            const hasPassedHeroButton = window.scrollY > heroButtonPageBottom + 24;
 
-            if (trigger) {
-                const triggerTop = trigger.getBoundingClientRect().top;
-                active = triggerTop < 0;
-            } else {
-                active = window.scrollY > 450;
-            }
+            const rsvpTop = rsvpSection ? rsvpSection.getBoundingClientRect().top + window.scrollY : Infinity;
+            const nearRsvp = window.scrollY + window.innerHeight > rsvpTop + 80;
 
-            const nearRsvp = rsvpSection
-            ? rsvpSection.getBoundingClientRect().top < window.innerHeight * 0.85
-            : false;
+            const show = unlocked && !expired && hasPassedHeroButton && !nearRsvp;
 
-            document.body.classList.toggle("sticky-rsvp-active", unlocked && !expired && active && !nearRsvp);
-            document.body.classList.toggle("sticky-rsvp-suppressed", expired || nearRsvp || !unlocked);
+            sticky.classList.toggle("is-visible", show);
+            sticky.classList.toggle("hidden", !show);
         }
 
         window.addEventListener("scroll", updateStickyRsvp, {
             passive: true
         });
         window.addEventListener("resize", updateStickyRsvp);
-        window.addEventListener("load", updateStickyRsvp);
+        document.addEventListener("visibilitychange", updateStickyRsvp);
         setInterval(updateStickyRsvp, 500);
+        updateStickyRsvp();
 
         window.updateStickyRsvp = updateStickyRsvp;
-        updateStickyRsvp();
     })();
     </script>
 </body>

@@ -30,6 +30,7 @@
     }
 
     body {
+        padding-bottom: 86px;
         margin: 0;
         background: var(--ivory);
         color: var(--ink);
@@ -331,6 +332,28 @@
 
         .scene-closed {
             width: min(86vw, 380px)
+        }
+    }
+
+    @media (max-width: 760px) {
+        .invite-art {
+            position: relative;
+            width: 100vw;
+            max-width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .scene-img {
+            left: 50%;
+            right: auto;
+        }
+
+        .scene-open {
+            width: min(86vw, 390px);
+            margin-left: 0;
         }
     }/* SITE */
     .eyebrow {
@@ -868,7 +891,7 @@
     .music-toggle {
         position: fixed;
         left: 18px;
-        bottom: 18px;
+        bottom: 104px;
         z-index: 120;
         display: inline-grid;
         place-items: center;
@@ -876,8 +899,9 @@
         height: 44px;
         border: 1px solid rgba(139, 62, 74, .28);
         border-radius: 50%;
-        background: rgba(251, 248, 244, .62);
+        background: rgba(251, 248, 244, .72);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         color: var(--rose-deep);
         font-size: 17px;
         line-height: 1;
@@ -890,125 +914,150 @@
         color: var(--ivory)
     }
 
+    @media (max-width: 760px) {
+        .music-toggle {
+            left: 14px;
+            bottom: 92px;
+            width: 44px;
+            height: 44px
+        }
+    }
+
     .sticky-rsvp {
         position: fixed;
-        right: 18px;
-        bottom: 18px;
+        left: 0;
+        right: 0;
+        bottom: 0;
         z-index: 110;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 86px;
+        padding: 18px 24px;
+        background: rgba(251, 248, 244, .62);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid rgba(139, 62, 74, .16);
+        box-shadow: 0 -10px 30px rgba(45, 41, 38, .08);
+        color: var(--ivory);
+        text-decoration: none;
+    }
+
+    .sticky-rsvp::after {
+        content: "RSVP NOW";
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 116px;
-        height: 48px;
-        padding: 0 22px;
-        border: 1px solid rgba(139, 62, 74, .28);
-        border-radius: 999px;
-        background: rgba(251, 248, 244, .62);
-        backdrop-filter: blur(10px);
-        color: var(--rose-deep);
-        text-decoration: none;
+        min-width: 158px;
+        height: 54px;
+        padding: 0 28px;
+        background: var(--rose-deep);
+        color: var(--ivory);
         font-size: 11px;
-        letter-spacing: .16em;
+        letter-spacing: .18em;
         text-transform: uppercase;
-        box-shadow: 0 10px 24px rgba(45, 41, 38, .12);
-    }
-
-    .sticky-rsvp:hover {
-        background: rgba(251, 248, 244, .82)
     }
 
     .sticky-rsvp.hidden {
         display: none
     }
 
+    .sticky-rsvp span {
+        display: none
+    }
+
     @media (max-width: 760px) {
         .sticky-rsvp {
-            right: 14px;
-            bottom: 14px;
-            height: 44px;
-            min-width: 104px
+            min-height: 76px;
+            padding: 14px 18px
         }
 
-        .music-toggle {
-            left: 14px;
-            bottom: 14px;
-            width: 44px;
-            height: 44px
+        .sticky-rsvp::after {
+            height: 48px;
+            min-width: 144px
         }
     }
+
+    .music-toggle {
+        left: 14px;
+        bottom: 14px;
+        width: 44px;
+        height: 44px
+    }
+}
 }
 
 .site-footer {
-    padding:24px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    justify-content:center;
-    background:var(--rose-deep);
-    color:var(--ivory);
-    font-size:11px;
-    letter-spacing:.16em;
-    text-transform:uppercase
+    padding: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    background: var(--rose-deep);
+    color: var(--ivory);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase
 }
 
 .travel-guide {
-    display:grid;
-    gap:24px
+    display: grid;
+    gap: 24px
 }
 
 .travel-guide-card {
-    display:grid;
-    grid-template-columns:1fr;
-    border:1px solid var(--line);
-    background:rgba(255, 255, 255, .52);
-    overflow:hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .52);
+    overflow: hidden;
 }
 
 .travel-guide-card img {
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    object-position:center center;
-    display:block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
 }
 
 .travel-guide-card div {
-    padding:26px
+    padding: 26px
 }
 
 .travel-guide-card span {
-    display:block;
-    font-family:var(--display);
-    font-size:42px;
-    line-height:1;
-    color:var(--rose-deep);
-    margin-bottom:10px;
+    display: block;
+    font-family: var(--display);
+    font-size: 42px;
+    line-height: 1;
+    color: var(--rose-deep);
+    margin-bottom: 10px;
 }
 
 .travel-guide-card h3 {
-    font-size:34px
+    font-size: 34px
 }
 
 .travel-guide-card a {
-    display:inline-block;
-    margin:10px 14px 0 0;
-    font-size:11px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--rose-deep);
-    border-bottom:1px solid currentColor;
+    display: inline-block;
+    margin: 10px 14px 0 0;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--rose-deep);
+    border-bottom: 1px solid currentColor;
 }
 
 @media (min-width: 761px) {
     .travel-guide-card {
-        grid-template-columns: 42% 58%;
-        align-items: stretch
+        grid-template-columns:42% 58%;
+        align-items:stretch
     }
 
     .travel-guide-card img {
-        height: 100%;
-        min-height: 280px
+        height:100%;
+        min-height:280px
     }
 }
 
@@ -1018,18 +1067,18 @@
     }
 
     .invite-art {
-        width: min(980px, 94vw);
-        height: min(800px, 78svh);
+        width:min(980px, 94vw);
+        height:min(800px, 78svh);
         margin-top:-4svh
     }
 
     .scene-closed {
-        width: min(600px, 58vw);
+        width:min(600px, 58vw);
         transform:translate(-50%, -44%) scale(.92)
     }
 
     .scene-open {
-        width: min(620px, 54vw);
+        width:min(620px, 54vw);
         transform:translate(-50%, -45%) scale(.86)
     }
 
@@ -1038,20 +1087,20 @@
     }
 
     .invitation-copy {
-        top: 31%;
+        top:31%;
         width:min(235px, 22vw)
     }
 
     .invitation-copy p {
-        font-size: 6.4px;
-        line-height: 1.12;
-        margin-bottom: 1px;
+        font-size:6.4px;
+        line-height:1.12;
+        margin-bottom:1px;
         letter-spacing:.16em
     }
 
     .invite-monogram {
-        width: 158px;
-        height: 120px;
+        width:158px;
+        height:120px;
         margin:1px auto
     }
 
@@ -1068,7 +1117,7 @@
     }
 
     .invitation-copy em {
-        font-size: 9px;
+        font-size:9px;
         line-height:1.1
     }
 
@@ -1081,13 +1130,13 @@
     }
 
     .nav-inner nav {
-        display: flex;
-        position: static;
-        padding: 0;
-        background: transparent;
-        border: 0;
-        flex-direction: row;
-        gap: 30px;
+        display:flex;
+        position:static;
+        padding:0;
+        background:transparent;
+        border:0;
+        flex-direction:row;
+        gap:30px;
         align-items:center
     }
 
@@ -1096,7 +1145,7 @@
     }
 
     .hero {
-        min-height: 90vh;
+        min-height:90vh;
         padding:96px 24px
     }
 
@@ -1105,7 +1154,7 @@
     }
 
     .hero-monogram {
-        width: 280px;
+        width:280px;
         height:220px
     }
 
@@ -1138,7 +1187,7 @@
     }
 
     .split {
-        grid-template-columns: .9fr 1.1fr;
+        grid-template-columns:.9fr 1.1fr;
         gap:64px
     }
 
@@ -1155,7 +1204,7 @@
     }
 
     .rsvp-panel {
-        padding: 64px
+        padding:64px
     }
 }
 </style>
@@ -1183,7 +1232,9 @@
     <audio id="bg-music" src="assets/background-music.mp3" loop preload="none"></audio>
     <button class="music-toggle sticky-music" id="music-toggle" type="button" aria-label="Play background music">♪</button>
 
-    <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">RSVP</a>
+    <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">
+        <span>RSVP</span>
+    </a>
     <div id="main-content">
         <header class="site-nav">
             <div class="nav-inner">
@@ -1237,7 +1288,12 @@
             <div class="narrow">
                 <p class="eyebrow">Welcome</p>
                 <h2>Welcome to one of our favourite places in the world.</h2>
-                <p>We are so excited to celebrate our love with you in beautiful Paros and can’t wait for an unforgettable weekend together.</p>
+                <p>
+                    When we got engaged in Paros, we knew this island would forever be part of our story. Throughout our time here, we couldn't stop imagining what it would be like to return with the people who mean the most to us. We can’t wait to share its beauty, its charm, and create new memories with you.
+                    <br>
+                    <br>
+                    Thank you for making the journey to celebrate with us. Having you here means more than words can say.
+                </p>
             </div>
             <div class="photo-carousel">
                 <div class="carousel-track" id="carousel-track">
@@ -1695,6 +1751,7 @@
 
 
 
+
     (function() {
         const audio = document.getElementById("bg-music");
         const btn = document.getElementById("music-toggle");
@@ -1703,6 +1760,7 @@
 
         audio.volume = 0.12;
         let userPaused = false;
+        let hasUserInteracted = false;
 
         function render() {
             const playing = !audio.paused && !audio.ended;
@@ -1711,7 +1769,7 @@
             btn.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
         }
 
-        async function tryPlay() {
+        async function playMusic() {
             if (userPaused)
                 return;
             try {
@@ -1720,9 +1778,10 @@
             render();
         }
 
-        btn.addEventListener("click", async (e) => {
+        btn.addEventListener("click", async function(e) {
             e.preventDefault();
             e.stopPropagation();
+            hasUserInteracted = true;
 
             if (audio.paused) {
                 userPaused = false;
@@ -1739,13 +1798,18 @@
         audio.addEventListener("play", render);
         audio.addEventListener("pause", render);
 
-        window.addEventListener("load", () => setTimeout(tryPlay, 600));
+        // Try autoplay. Most browsers block this, so this is best-effort only.
+        window.addEventListener("load", () => setTimeout(playMusic, 600));
 
+        // Unlock audio on first interaction, but never when user clicked the pause button.
         ["pointerdown", "touchstart", "keydown"].forEach(evt => {
-            document.addEventListener(evt, (e) => {
+            document.addEventListener(evt, function(e) {
+                if (hasUserInteracted || userPaused)
+                    return;
                 if (e.target && e.target.closest && e.target.closest("#music-toggle"))
                     return;
-                tryPlay();
+                hasUserInteracted = true;
+                playMusic();
             }, {
                 once: true
             });
@@ -1753,9 +1817,11 @@
 
         window.startWeddingMusic = function() {
             userPaused = false;
-            tryPlay();
+            hasUserInteracted = true;
+            playMusic();
         };
     })();
+
 
 
 

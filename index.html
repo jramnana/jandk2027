@@ -953,62 +953,10 @@
 }
 }
 
-.sticky-rsvp {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 110;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    min-height: 86px;
-    padding: 18px 24px;
-    background: rgba(251, 248, 244, .68);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(139, 62, 74, .16);
-    box-shadow: 0 -10px 30px rgba(45, 41, 38, .08);
-    text-decoration: none;
-}
-
-body.site-unlocked .sticky-rsvp.is-visible {
-    display: flex
-}
-
-.sticky-rsvp.hidden {
-    display: none !important
-}
-
 .sticky-rsvp::after {
-    content: "RSVP NOW";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 164px;
-    height: 54px;
-    padding: 0 30px;
-    background: var(--rose-deep);
-    color: var(--ivory);
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
+    height: 48px;
+    min-width: 144px
 }
-
-.sticky-rsvp span {
-    display: none
-}
-
-@media (max-width: 760px) {
-    .sticky-rsvp {
-        min-height:76px;
-        padding:14px 18px
-    }
-
-    .sticky-rsvp::after {
-        height:48px;
-        min-width:144px
-    }
 }
 
 .sticky-rsvp::after {
@@ -1349,6 +1297,65 @@ body.site-unlocked .sticky-rsvp.is-visible {
         padding: 64px
     }
 }
+
+/* FINAL STICKY RSVP OVERRIDE */
+.sticky-rsvp {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 86px !important;
+    padding: 18px 24px !important;
+    background: rgba(251, 248, 244, .68) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(139, 62, 74, .16) !important;
+    box-shadow: 0 -10px 30px rgba(45, 41, 38, .08) !important;
+    text-decoration: none !important;
+}
+
+body.site-unlocked .sticky-rsvp.is-visible {
+    display: flex !important;
+}
+
+.sticky-rsvp.hidden {
+    display: none !important;
+}
+
+.sticky-rsvp::after {
+    content: "RSVP NOW";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 164px;
+    height: 54px;
+    padding: 0 30px;
+    background: var(--rose-deep);
+    color: var(--ivory);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.sticky-rsvp span {
+    display: none
+}
+
+@media (max-width: 760px) {
+    .sticky-rsvp {
+        min-height: 76px !important;
+        padding: 14px 18px !important
+    }
+
+    .sticky-rsvp::after {
+        height: 48px;
+        min-width: 144px
+    }
+}
 </style>
 </head>
 <body class="locked">
@@ -1374,10 +1381,10 @@ body.site-unlocked .sticky-rsvp.is-visible {
     <audio id="bg-music" src="assets/background-music.mp3" loop preload="none"></audio>
     <button class="music-toggle sticky-music" id="music-toggle" type="button" aria-label="Play background music">♪</button>
 
-    <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">
-        <span>RSVP</span>
-    </a>
     <div id="main-content">
+        <a class="sticky-rsvp" id="sticky-rsvp" href="#rsvp">
+            <span>RSVP</span>
+        </a>
         <header class="site-nav">
             <div class="nav-inner">
                 <a class="brand" href="#hero">
@@ -1606,6 +1613,10 @@ body.site-unlocked .sticky-rsvp.is-visible {
                     <div class="faq-item">
                         <h3>What should I wear?</h3>
                         <p>Formal wedding attire. More detailed guidance will follow closer to the date.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>May I bring my children?</h3>
+                        <p>We've chosen to make our wedding an adults-only celebration. We hope this gives everyone the chance to relax, celebrate, and enjoy a weekend away. Thank you so much for understanding.</p>
                     </div>
                 </div>
             </div>
@@ -1990,6 +2001,10 @@ body.site-unlocked .sticky-rsvp.is-visible {
 
 
 
+
+
+
+
     (function() {
         const sticky = document.getElementById("sticky-rsvp");
         const heroButton = document.querySelector(".hero-rsvp");
@@ -2002,24 +2017,20 @@ body.site-unlocked .sticky-rsvp.is-visible {
         function updateStickyRsvp() {
             const unlocked = document.body.classList.contains("site-unlocked");
             const expired = Date.now() > deadline;
+            const heroPassed = heroButton.getBoundingClientRect().bottom < 0;
+            const atRsvp = rsvpSection ? rsvpSection.getBoundingClientRect().top < window.innerHeight * 0.85 : false;
 
-            const heroButtonBottom = heroButton.getBoundingClientRect().bottom;
-            const hasScrolledPastHeroButton = heroButtonBottom < 0;
+            const show = unlocked && !expired && heroPassed && !atRsvp;
 
-            const rsvpTop = rsvpSection ? rsvpSection.getBoundingClientRect().top : Infinity;
-            const nearRsvpForm = rsvpTop < window.innerHeight * 0.9;
-
-            const shouldShow = unlocked && !expired && hasScrolledPastHeroButton && !nearRsvpForm;
-
-            sticky.classList.toggle("is-visible", shouldShow);
-            sticky.classList.toggle("hidden", !shouldShow);
+            sticky.classList.toggle("is-visible", show);
+            sticky.classList.toggle("hidden", !show);
         }
 
         window.addEventListener("scroll", updateStickyRsvp, {
             passive: true
         });
         window.addEventListener("resize", updateStickyRsvp);
-        setInterval(updateStickyRsvp, 1000);
+        setInterval(updateStickyRsvp, 500);
         updateStickyRsvp();
     })();
     </script>

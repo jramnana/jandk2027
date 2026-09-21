@@ -1467,6 +1467,18 @@ body.site-unlocked .sticky-rsvp.is-visible {
         min-width: 144px
     }
 }
+
+/* Room selection integration */
+#rooms{scroll-margin-top:110px;background:linear-gradient(180deg,#f5e9e9,#fbf8f4)}
+#rooms .section-head{margin-bottom:28px}
+.room-picker-frame{width:100%;height:880px;min-height:600px;border:1px solid var(--line);background:var(--ivory);display:block}
+.room-picker-frame[hidden]{display:none}
+.room-picker-launch{text-align:center;margin:20px 0}
+.room-picker-pending{max-width:720px;margin:0 auto;padding:32px;border:1px solid var(--line);text-align:center;background:#ffffff66}
+.hero-room-link{display:inline-block;margin:16px 12px 0;padding:12px 20px;border:1px solid var(--rose-deep);color:var(--rose-deep);background:rgba(251,248,244,.75);font-size:11px;letter-spacing:.12em;text-decoration:none;text-transform:uppercase}
+.room-picker-footnote{font-size:12px;text-align:center;max-width:720px;margin:20px auto}
+@media(max-width:760px){.room-picker-frame{height:820px}#rooms{padding-left:12px;padding-right:12px}}
+
 </style>
 </head>
 <body class="locked">
@@ -1507,6 +1519,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 <nav id="nav-menu">
                     <a href="#weekend">Weekend</a>
                     <a href="#travel">Travel</a>
+                    <a href="#rooms">Choose a room</a>
                     <a href="#stay">Stay</a>
                     <a href="#explore">Paros Guide</a>
                     <a class="nav-rsvp" href="#rsvp">RSVP</a>
@@ -1542,7 +1555,24 @@ body.site-unlocked .sticky-rsvp.is-visible {
                     </div>
                 </div>
                 <a class="hero-rsvp" href="#rsvp">RSVP Now</a>
+                <a class="hero-room-link" href="#rooms">Choose a room</a>
                 <p class="hero-rsvp-note">Please RSVP by Oct 15th</p>
+            </div>
+        </section>
+        <section id="rooms" aria-labelledby="rooms-heading">
+            <div class="section-inner">
+                <div class="section-head">
+                    <p class="eyebrow">Your place in Paros</p>
+                    <h2 id="rooms-heading">Stay with us.</h2>
+                    <p>Find your room for our wedding weekend. Explore the photos, choose your stay, and make yourself at home.</p>
+                </div>
+                <div id="room-picker-pending" class="room-picker-pending">
+                    <h3>Rooms are coming soon.</h3>
+                    <p>We’re putting the finishing touches on our room collection. Room selection will be available here when booking opens.</p>
+                </div>
+                <iframe id="room-picker-frame" class="room-picker-frame" title="Choose your wedding room" hidden loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                <p id="room-picker-launch" class="room-picker-launch" hidden><a id="room-picker-link" class="hero-room-link" target="_blank" rel="noopener">Open room selection in a new tab ↗</a></p>
+                <p class="room-picker-footnote">An extra bed for one additional guest is available in selected rooms for €30 per night. Your room allocation and wedding RSVP are separate.</p>
             </div>
         </section>
         <section class="welcome">
@@ -1672,7 +1702,8 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 <div>
                     <p class="eyebrow">Stay</p>
                     <h2>Naoussa will be home base.</h2>
-                    <p>We’ve reserved special pricing with Adonis Hotel and its sister hotel next door. Breakfast is included, and staying here will keep guests close to the weekend plans and transportation. Hotel booking details and rates will be shared soon.</p>
+                    <p><a href="#rooms">Explore rooms & availability →</a></p>
+                    <p>We’ve reserved special pricing with Adonis Hotel and its sister hotel next door. Breakfast is included, and staying here will keep guests close to the weekend plans and transportation. Explore the room selection above for available stays and rates. Room allocations are followed by hotel confirmation and payment instructions.</p>
                 </div>
                 <div class="cards image-cards">
                     <article>
@@ -1715,7 +1746,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
                     </div>
                     <div class="faq-item">
                         <h3>Where should I stay?</h3>
-                        <p>We recommend Adonis Hotel or La Maltese next door, where we have arranged special pricing and breakfast is included. Hotel booking details and rates will be shared soon.</p>
+                        <p>We recommend Adonis Hotel or La Maltese next door, where we have arranged special pricing and breakfast is included. Explore the room selection above for available stays and rates. Room allocations are followed by hotel confirmation and payment instructions.</p>
                     </div>
                     <div class="faq-item">
                         <h3>How do I get to Paros?</h3>
@@ -1737,7 +1768,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 <div class="rsvp-panel">
                     <p class="eyebrow">RSVP</p>
                     <h2>Kindly reply</h2>
-                    <p>Please RSVP by October 15, 2026. If you indicate interest in the hotel block, we’ll follow up with instructions on confirming the reservation.</p>
+                    <p>Please RSVP by October 15, 2026. Room selection is a separate step: choose your room in the Stay with us section above. Submitting this RSVP does not reserve a room.</p>
                     <div class="rsvp-countdown">
                         <div>
                             <strong id="rsvp-days">–</strong>
@@ -1769,11 +1800,11 @@ body.site-unlocked .sticky-rsvp.is-visible {
                             <input name="guestCount" type="number" min="1" max="4">
                         </div>
                         <div class="field">
-                            <label>Interested in hotel block booking?</label>
+                            <label>Your hotel plans</label>
                             <select name="hotelBlock">
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>Not sure yet</option>
+                                <option value="Not sure yet">Not sure yet</option>
+                                <option value="Yes">Staying in the wedding block (select your room separately)</option>
+                                <option value="No">Staying elsewhere</option>
                             </select>
                         </div>
                         <div class="field">
@@ -2151,5 +2182,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
         window.updateStickyRsvp = updateStickyRsvp;
     })();
     </script>
+    <script src="js/room-booking-config.js"></script>
+    <script src="js/room-booking.js"></script>
 </body>
 </html>

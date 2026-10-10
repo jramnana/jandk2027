@@ -1556,7 +1556,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 </div>
                 <a class="hero-rsvp" href="#rsvp">RSVP Now</a>
                 <a class="hero-room-link" href="#rooms">Choose a room</a>
-                <p class="hero-rsvp-note">Please RSVP by Oct 15th</p>
+                <p class="hero-rsvp-note">Please RSVP by December 17</p>
             </div>
         </section>
         <section id="rooms" aria-labelledby="rooms-heading">
@@ -1612,11 +1612,12 @@ body.site-unlocked .sticky-rsvp.is-visible {
                         </div>
                         <h3>Check-In & Welcome Get Together</h3>
                         <p>
-                            Stilvi Restaurant
+                            Marmita Restaurant
                             <br>
                             7:30 PM – 12:00 AM
                         </p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Stilvi+Restaurant+Paros" target="_blank">Open in Google Maps →</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Marmitta+Restaurant+Naoussa+Paros" target="_blank" rel="noopener noreferrer">Open in Google Maps →</a><br>
+                        <a href="https://www.instagram.com/marmitta_naoussa/" target="_blank" rel="noopener noreferrer">See Marmita on Instagram →</a>
                     </article>
                     <article class="weekend-card">
                         <img class="event-img" src="assets/ceremony.jpg" alt="">
@@ -1721,6 +1722,22 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 </div>
             </div>
         </section>
+        <section id="getting-around">
+            <div class="section-inner split">
+                <div>
+                    <p class="eyebrow">Getting around</p>
+                    <h2>Explore the island.</h2>
+                    <p>Paros is easy to explore. We’ve worked with local rental company Motorland to arrange a special 15% discount for our wedding guests.</p>
+                </div>
+                <div class="cards">
+                    <article>
+                        <h3>A little extra for your island adventures.</h3>
+                        <p>Enjoy <strong>15% off</strong> your rental with Motorland using the code <strong>JKwedding</strong>.</p>
+                        <a href="https://www.motorland.gr/" target="_blank" rel="noopener noreferrer">Explore Motorland rentals →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
         <section id="explore" class="soft">
             <div class="section-inner">
                 <div class="section-head">
@@ -1742,7 +1759,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 <div class="faq-list">
                     <div class="faq-item">
                         <h3>When should I RSVP?</h3>
-                        <p>Please RSVP by October 15, 2026.</p>
+                        <p>Please RSVP by December 17, 2026.</p>
                     </div>
                     <div class="faq-item">
                         <h3>Where should I stay?</h3>
@@ -1768,7 +1785,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
                 <div class="rsvp-panel">
                     <p class="eyebrow">RSVP</p>
                     <h2>Kindly reply</h2>
-                    <p>Please RSVP by October 15, 2026. Room selection is a separate step: choose your room in the Stay with us section above. Submitting this RSVP does not reserve a room.</p>
+                    <p>Please RSVP by December 17, 2026. Room selection is a separate step: choose your room in the Stay with us section above. Submitting this RSVP does not reserve a room.</p>
                     <div class="rsvp-countdown">
                         <div>
                             <strong id="rsvp-days">–</strong>
@@ -1941,7 +1958,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
         const el = document.getElementById("rsvp-days");
         if (!el)
             return;
-        const target = new Date("2026-10-15T23:59:59").getTime();
+        const target = new Date("2026-12-17T23:59:59").getTime();
         function tick() {
             const diff = target - Date.now();
             el.textContent = diff <= 0 ? "0" : Math.ceil(diff / 864e5)
@@ -2153,7 +2170,7 @@ body.site-unlocked .sticky-rsvp.is-visible {
         if (!sticky || !heroButton)
             return;
 
-        const deadline = new Date("2026-10-15T23:59:59").getTime();
+        const deadline = new Date("2026-12-17T23:59:59").getTime();
 
         function updateStickyRsvp() {
             const unlocked = document.body.classList.contains("site-unlocked");
